@@ -5,6 +5,7 @@ A financial reporting tool
 ## Architecture
 
 ![archi-1](./img/archi-1.png)
+[Source](https://miro.com/app/board/uXjVMWXddkA=/)
 
 There are 2 services:
 
@@ -15,13 +16,13 @@ There are 2 services:
   - **Reporting Controller**: It has 2 endpoint
 
     - `POST`: It receives the data sources from the web app, and return nothing if success
-    
+
     - `GET`: It returns the reporting results.
 
-  - **Reporting Service**: 
+  - **Reporting Service**:
 
     1. It maps the requests to the internal data structures.
 
     2. It creates the reports based on the local **user reporting config json**. This config file is attached to a user by his `user_id`
 
-    3. It saves the orginal data and reporting data into the database. 
+    3. It saves the orginal data and reporting data into the database.
