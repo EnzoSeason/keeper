@@ -1,6 +1,11 @@
 version: '3.4'
 
 services:
+  webspa:
+    image: keeper-webspa
+    build:
+      context: ./web-spa
+  
   monoapi:
     image: keeper-monoapi
     build:

@@ -1,6 +1,13 @@
 version: '3.4'
 
 services:
+  webspa:
+    ports:
+      - 4200:4200
+    volumes:
+      - ./web-spa:/project
+      - /project/node_modules
+  
   monoapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
