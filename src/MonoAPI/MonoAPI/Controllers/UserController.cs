@@ -22,7 +22,7 @@ public class UserController : ControllerBase
         return await _context.Users.ToListAsync();
     }
     
-    [HttpGet("{id}")]
+    [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<User>> GetUser(Guid id)
