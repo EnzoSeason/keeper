@@ -5,6 +5,7 @@ services:
     image: keeper-webspa
     build:
       context: ./web-spa
+      dockerfile: Dockerfile
   
   monoapi:
     image: keeper-monoapi
