@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  monoapi:
+    image: ${DOCKER_REGISTRY-}monoapi
+    build:
+      context: ./MonoAPI
+      dockerfile: MonoAPI/Dockerfile
