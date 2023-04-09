@@ -9,7 +9,7 @@ A financial reporting tool
 
 There are 2 services:
 
-- Identity Service: It manages the user. Authentication is not includes.
+- Identity Service: It manages the user. Authentication is not included.
 
 - Reporting Service: It's composed by 2 parts
 
