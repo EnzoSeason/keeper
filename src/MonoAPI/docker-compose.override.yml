@@ -26,6 +26,7 @@ services:
       - "27018:27017"
     volumes:
       - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
     networks: 
       - mono-net
     
@@ -33,6 +34,7 @@ services:
 volumes:
   node_modules:
   mongodb_data:
+  mongodb_config:
 
 networks:
   mono-net:
