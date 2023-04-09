@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MonoAPI.Models;
@@ -7,7 +6,6 @@ namespace MonoAPI.Controllers;
 
 [ApiController]
 [Route("api/user")]
-[Authorize]
 public class UserController : ControllerBase
 {
     private readonly UserContext _context;

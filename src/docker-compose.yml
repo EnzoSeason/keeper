@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  webspa:
+  web-spa:
     image: keeper/webspa
     build:
-      context: ./web-spa
-      dockerfile: Dockerfile
+      context: ./MonoAPI
+      dockerfile: web-spa/Dockerfile
   
-  monoapi:
+  mono-api:
     image: keeper/monoapi
     build:
       context: ./MonoAPI
