@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  web-spa:
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./web-spa:/project
+      - node_modules:/project/node_modules
+    networks:
+      - mono-net
+  
+  mono-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "1234:80"
+    networks:
+      - mono-net
+  
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks: 
+      - mono-net
+    
+
+volumes:
+  node_modules:
+  mongodb_data:
+
+networks:
+  mono-net:
