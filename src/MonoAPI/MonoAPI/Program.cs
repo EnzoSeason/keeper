@@ -17,6 +17,20 @@ internal class Program
        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        
+        builder.Services.AddAuthentication("Bearer")
+            .AddJwtBearer(options =>
+            {
+                options.Authority = "https://localhost:5001";
+                options.TokenValidationParameters.ValidateAudience = false;
+            });
+        builder.Services.AddAuthorization(options =>
+            options.AddPolicy("ApiScope", policy =>
+            {
+                policy.RequireAuthenticatedUser();
+                policy.RequireClaim("scope", "mono-api");
+            })
+        );
 
         var app = builder.Build();
 
@@ -27,9 +41,11 @@ internal class Program
             app.UseSwaggerUI();
         }
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
-        app.MapControllers();
+        app.MapControllers()
+            .RequireAuthorization("ApiScope");
 
         app.Run();
     }

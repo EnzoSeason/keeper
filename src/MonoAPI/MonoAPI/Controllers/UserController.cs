@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MonoAPI.Models;
@@ -5,7 +6,8 @@ using MonoAPI.Models;
 namespace MonoAPI.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/user")]
+[Authorize]
 public class UserController : ControllerBase
 {
     private readonly UserContext _context;
@@ -17,6 +19,7 @@ public class UserController : ControllerBase
     
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
         return await _context.Users.ToListAsync();
@@ -24,6 +27,7 @@ public class UserController : ControllerBase
     
     [HttpGet("{id:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<User>> GetUser(Guid id)
     {
@@ -39,6 +43,7 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<User>> CreateUser([FromBody] User user)
     {
