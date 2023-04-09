@@ -9,7 +9,7 @@ A financial reporting tool
 
 There are 2 services:
 
-- Identity Service: It manages the user (sign in & sign out).
+- Identity Service: It manages the user. Authentication is not includes.
 
 - Reporting Service: It's composed by 2 parts
 
@@ -26,3 +26,16 @@ There are 2 services:
     2. It creates the reports based on the local **user reporting config json**. This config file is attached to a user by his `user_id`
 
     3. It saves the orginal data and reporting data into the database.
+    
+## Usage
+
+To run the project in "Production" on the local machine
+
+```code
+docker compose up
+```
+
+## Development
+
+Run the project locally. Please lanuch **MongoDB** on your local machine.
+  
