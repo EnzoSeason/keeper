@@ -5,8 +5,8 @@ services:
     ports:
       - 4200:4200
     volumes:
-      - ./MonoAPI/web-spa:/project
-      - keeper-webspa-node-modules:/project/node_modules
+      - ./web-spa:/project
+      - node_modules:/project/node_modules
     networks:
       - mono-net
     
@@ -19,7 +19,7 @@ services:
       - mono-net
 
 volumes:
-  keeper-webspa-node-modules:
+  node_modules:
     driver: local
 
 networks:

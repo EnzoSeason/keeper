@@ -4,11 +4,11 @@ services:
   web-spa:
     image: keeper/webspa
     build:
-      context: ./MonoAPI
+      context: .
       dockerfile: web-spa/Dockerfile
   
   mono-api:
     image: keeper/monoapi
     build:
-      context: ./MonoAPI
+      context: .
       dockerfile: MonoAPI/Dockerfile
