@@ -4,8 +4,7 @@ services:
   web-spa:
     image: keeper/webspa
     build:
-      context: .
-      dockerfile: web-spa/Dockerfile
+      context: ./web-spa
   
   mono-api:
     image: keeper/monoapi

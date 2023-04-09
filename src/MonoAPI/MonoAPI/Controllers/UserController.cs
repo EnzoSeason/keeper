@@ -1,35 +1,35 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using MonoAPI.Models;
+using MonoAPI.Services;
 
 namespace MonoAPI.Controllers;
 
 [ApiController]
-[Route("api/user")]
+[Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UserContext _context;
-
-    public UserController(UserContext context)
-    {
-        _context = context;
-    }
+    private readonly UsersService _usersService;
     
+    public UserController(UsersService usersService)
+    {
+        _usersService = usersService;
+    }
+
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     public async Task<ActionResult<IEnumerable<User>>> GetUsers()
     {
-        return await _context.Users.ToListAsync();
+        var users = await _usersService.GetUsers();
+        
+        return new ActionResult<IEnumerable<User>>(users);
     }
     
-    [HttpGet("{id:guid}")]
+    [HttpGet("{uid:guid}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<User>> GetUser(Guid id)
+    public async Task<ActionResult<User>> GetUser(Guid uid)
     {
-        var user = await _context.Users.FindAsync(id);
+        var user = await _usersService.GetUser(uid);
 
         if (user == null)
         {
@@ -41,13 +41,11 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<User>> CreateUser([FromBody] User user)
     {
-        _context.Users.Add(user);
-        await _context.SaveChangesAsync();
+        var newUser = new User(Guid.NewGuid(), user.Username);
+        await _usersService.CreateUser(newUser);
         
-        return CreatedAtAction(nameof(CreateUser), new { id = user.Id }, user);
+        return CreatedAtAction(nameof(CreateUser), null, newUser);
     }
 }
