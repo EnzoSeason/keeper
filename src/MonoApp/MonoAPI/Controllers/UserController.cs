@@ -41,9 +41,9 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    public async Task<ActionResult<User>> CreateUser([FromBody] User user)
+    public async Task<ActionResult<User>> CreateUser([FromQuery] string username)
     {
-        var newUser = new User(Guid.NewGuid(), user.Username);
+        var newUser = new User(Guid.NewGuid(), username);
         await _usersService.CreateUser(newUser);
         
         return CreatedAtAction(nameof(CreateUser), null, newUser);
