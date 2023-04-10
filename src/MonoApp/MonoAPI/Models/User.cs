@@ -1,4 +1,5 @@
 #nullable enable
+using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -12,8 +13,7 @@ public class User
 
     [BsonRepresentation(BsonType.String)]
     public Guid Uid { get; set; }
-
-    [BsonElement("Name")]
+    
     public string Username { get; set; }
 
     public User(Guid uid, string username)
