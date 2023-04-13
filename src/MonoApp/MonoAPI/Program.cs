@@ -9,7 +9,7 @@ builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddControllers();
 
 builder.Services.Configure<MongoDbSettings>(
-    builder.Configuration.GetSection("Mongodb"));
+    builder.Configuration.GetSection("MongoDb"));
         
 builder.Services.AddSingleton<UsersService>();
 
