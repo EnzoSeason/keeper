@@ -1,24 +1,7 @@
 version: '3.4'
 
 services:
-  web-spa:
-    ports:
-      - "4200:4200"
-    volumes:
-      - ./web-spa:/project
-      - node_modules:/project/node_modules
-    networks:
-      - mono-net
-  
-  mono-api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-    ports:
-      - "1234:80"
-    networks:
-      - mono-net
-  
-  mongodb:
+  nosql-db:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=pass
@@ -27,14 +10,15 @@ services:
     volumes:
       - mongodb_data:/data/db
       - mongodb_config:/data/configdb
-    networks: 
-      - mono-net
-    
+
+  mono-api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "1234:80"
+    depends_on:
+      - nosql-db
 
 volumes:
-  node_modules:
   mongodb_data:
   mongodb_config:
-
-networks:
-  mono-net:

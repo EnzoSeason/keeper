@@ -1,16 +1,11 @@
 version: '3.4'
 
 services:
-  web-spa:
-    image: keeper/webspa
-    build:
-      context: ./web-spa
-  
+  nosql-db:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    
   mono-api:
-    image: keeper/monoapi
+    image: ${REGISTRY:-keeper}/mono.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: MonoAPI/Dockerfile
-      
-  mongodb:
-    image: mongodb/mongodb-community-server:6.0-ubi8
