@@ -15,6 +15,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - MongoDb__ConnectionString=mongodb://admin:pass@nosql-db:27017
+      - MongoDb__DatabaseName=MonoApp
     ports:
       - "1234:80"
 

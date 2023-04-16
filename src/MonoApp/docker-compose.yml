@@ -5,9 +5,9 @@ services:
     image: mongodb/mongodb-community-server:6.0-ubi8
     
   mono-api:
-    image: ${REGISTRY:-keeper}/mono.api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-keeper}/mono-api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: MonoAPI/Dockerfile
+      dockerfile: Mono.API/Dockerfile
     depends_on:
       - nosql-db

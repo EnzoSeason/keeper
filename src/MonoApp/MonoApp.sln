@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.API", "Mono.API\Mono.A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.UTest", "Mono.UTest\Mono.UTest.csproj", "{7F429B9B-309F-4D73-BADD-9B2A79E98CFF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.ITest", "Mono.ITest\Mono.ITest.csproj", "{F3A985A5-D3AC-4425-8D28-0320E2153FAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7F429B9B-309F-4D73-BADD-9B2A79E98CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F429B9B-309F-4D73-BADD-9B2A79E98CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F429B9B-309F-4D73-BADD-9B2A79E98CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3A985A5-D3AC-4425-8D28-0320E2153FAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3A985A5-D3AC-4425-8D28-0320E2153FAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3A985A5-D3AC-4425-8D28-0320E2153FAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3A985A5-D3AC-4425-8D28-0320E2153FAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
