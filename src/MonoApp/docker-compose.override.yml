@@ -13,12 +13,10 @@ services:
 
   mono-api:
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_ENVIRONMENT=Development
       - MongoDb__ConnectionString=mongodb://admin:pass@nosql-db:27017
     ports:
       - "1234:80"
-    depends_on:
-      - nosql-db
 
 volumes:
   mongodb_data:

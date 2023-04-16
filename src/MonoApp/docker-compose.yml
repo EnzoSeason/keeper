@@ -9,3 +9,5 @@ services:
     build:
       context: .
       dockerfile: MonoAPI/Dockerfile
+    depends_on:
+      - nosql-db
