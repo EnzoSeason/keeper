@@ -33,9 +33,9 @@ public class UserControllerTests
 
         _usersService.GetUsers().Returns(Task.FromResult((IEnumerable<User>)expectedUsers));
 
-        var users = await _userController.GetUsers();
+        var result = await _userController.GetUsers();
         
-        Assert.That(users.Value.SequenceEqual(expectedUsers));
+        Assert.That(result.Value.SequenceEqual(expectedUsers));
     }
     
     [TestCaseSource(nameof(GetUserTestCases))]
