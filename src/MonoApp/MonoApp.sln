@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1705.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoAPI", "MonoAPI\MonoAPI.csproj", "{56344D97-5046-472C-9132-D4CB075A898B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.API", "Mono.API\Mono.API.csproj", "{56344D97-5046-472C-9132-D4CB075A898B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

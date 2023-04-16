@@ -1,6 +1,6 @@
 ﻿using Microsoft.OpenApi.Models;
-using MonoAPI.Models;
-using MonoAPI.Services;
+using Mono.API;
+using Mono.API.Services;
 
 var builder = WebApplication.CreateBuilder(args); 
         

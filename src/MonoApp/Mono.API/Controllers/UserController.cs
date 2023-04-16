@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using MonoAPI.Models;
-using MonoAPI.Services;
+using Mono.API.Models;
+using Mono.API.Services;
 
-namespace MonoAPI.Controllers;
+namespace Mono.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

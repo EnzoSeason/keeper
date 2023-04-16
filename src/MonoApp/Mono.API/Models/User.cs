@@ -1,9 +1,8 @@
 #nullable enable
-using System.Text.Json.Serialization;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace MonoAPI.Models;
+namespace Mono.API.Models;
 
 public class User
 {

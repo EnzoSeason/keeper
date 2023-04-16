@@ -1,4 +1,4 @@
-namespace MonoAPI.Models;
+namespace Mono.API;
 
 public class MongoDbSettings
 {

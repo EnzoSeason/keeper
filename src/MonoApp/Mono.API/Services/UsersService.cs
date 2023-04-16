@@ -1,8 +1,8 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using MonoAPI.Models;
+using Mono.API.Models;
 
-namespace MonoAPI.Services;
+namespace Mono.API.Services;
 
 public class UsersService
 {
