@@ -4,7 +4,14 @@ using Mono.API.Models;
 
 namespace Mono.API.Services;
 
-public class UsersService
+public interface IUsersService
+{
+    Task<IEnumerable<User>> GetUsers();
+    Task<User> GetUser(Guid uid);
+    Task CreateUser(User user);
+}
+
+public class UsersService: IUsersService
 {
     private readonly IMongoCollection<User> _usersCollection;
     

@@ -8,9 +8,9 @@ namespace Mono.API.Controllers;
 [Route("api/v1/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UsersService _usersService;
+    private readonly IUsersService _usersService;
     
-    public UserController(UsersService usersService)
+    public UserController(IUsersService usersService)
     {
         _usersService = usersService;
     }
