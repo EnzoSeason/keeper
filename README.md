@@ -31,7 +31,7 @@ There are 2 services:
     
 ## Usage
 
-To run the project in "Production" on the local machine
+To run the project in Development mode on the local machine
 
 ```code
 docker compose up
@@ -40,4 +40,10 @@ docker compose up
 ## Development
 
 Run the project locally. Please lanuch **MongoDB** on your local machine.
+
+## ITest
+
+```code
+docker-compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
+```
   
