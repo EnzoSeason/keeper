@@ -15,7 +15,9 @@ There are 2 services:
 
   - **Reporting Controller**: It has 2 endpoint
 
-    - `POST`: It receives the data sources from the web app, and return nothing if success
+    - `POST`: It receives the data sources from the web app, clean up data, and write them into database.It returns nothing if success
+    
+    - `POST`: It receives the command that asks the App to read the data from database, create the report, and save the results into database
 
     - `GET`: It returns the reporting results.
 
