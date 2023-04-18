@@ -44,6 +44,6 @@ Run the project locally. Please lanuch **MongoDB** on your local machine.
 ## ITest
 
 ```code
-docker-compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
+docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
 ```
   
