@@ -1,5 +1,4 @@
 using System.Net;
-using Microsoft.Extensions.Configuration;
 using Mono.API.Models;
 using Xunit;
 
@@ -63,15 +62,5 @@ public class UserTests: IClassFixture<CustomWebApplicationFactory<Program>>, IDi
         var response = await _client.PostAsync(url, null);
         
         response.EnsureSuccessStatusCode();
-    }
-
-    private static IConfiguration GetConfiguration()
-    {
-        var projectDir = Directory.GetCurrentDirectory();
-        var configPath = Path.Combine(projectDir, "appsettings.json");
-        
-        return new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
-            .Build();
     }
 }
