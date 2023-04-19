@@ -7,9 +7,9 @@ public class MongoHelper
 {
     public IMongoDatabase Database { get; }
 
-    public static readonly string ConnectionString = "mongodb://admin:pass@localhost:27018";
+    public const string ConnectionString = "mongodb://admin:pass@localhost:27018";
 
-    public static readonly string DatabaseName = "MonoAppTest";
+    public const string DatabaseName = "MonoAppTest";
 
     public MongoHelper()
     {
