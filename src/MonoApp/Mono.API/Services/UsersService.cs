@@ -23,8 +23,7 @@ public class UsersService: IUsersService
         var mongoDatabase = mongoClient.GetDatabase(
             mongoDbSettings.Value.DatabaseName);
         
-        _usersCollection = mongoDatabase.GetCollection<User>(
-            mongoDbSettings.Value.UsersCollectionName);
+        _usersCollection = mongoDatabase.GetCollection<User>("Users");
     }
 
     public async Task<IEnumerable<User>> GetUsers() => await _usersCollection.Find(_ => true).ToListAsync();

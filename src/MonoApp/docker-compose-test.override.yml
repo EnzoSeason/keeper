@@ -7,3 +7,10 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=pass
     ports:
       - "27018:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+      - mongodb_test_config:/data/configdb
+
+volumes:
+  mongodb_test_data:
+  mongodb_test_config:
