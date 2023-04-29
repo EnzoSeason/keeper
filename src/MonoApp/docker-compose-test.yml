@@ -3,3 +3,24 @@ version: '3.4'
 services:
   nosql-db:
     image: mongodb/mongodb-community-server:6.0-ubi8
+    
+  mono-api-unit-test:
+    image: ${REGISTRY:-keeper}/mono-api-unit-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Mono.API/Dockerfile
+      target: unittest
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+  
+  mono-api-integration-test:
+    image: ${REGISTRY:-keeper}/mono-api-functional-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Mono.API/Dockerfile
+      target: integrationtest
+    depends_on:
+      - nosql-db
+    volumes:
+      - ${BUILD_ARTIFACTSTAGINGDIRECTORY:-./tests-results/}:/tests
+    

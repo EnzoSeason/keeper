@@ -12,6 +12,12 @@ COPY . .
 WORKDIR "/src/Mono.API"
 RUN dotnet build "Mono.API.csproj" -c Release -o /app/build
 
+FROM build AS unittest
+WORKDIR "/src/Mono.UTest"
+
+FROM build AS integrationtest
+WORKDIR "/src/Mono.ITest"
+
 FROM build AS publish
 RUN dotnet publish "Mono.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 

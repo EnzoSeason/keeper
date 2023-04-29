@@ -10,6 +10,28 @@ services:
     volumes:
       - mongodb_test_data:/data/db
       - mongodb_test_config:/data/configdb
+  
+  mono-api-unit-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5103:80"
+    entrypoint:
+      - dotnet
+      - test
+      - --logger
+      - trx;LogFileName=/tests/mono-api-unit-test-results.xml
+  
+  mono-api-integration-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "5113:80"
+    entrypoint:
+      - dotnet
+      - test
+      - --logger
+      - trx;LogFileName=/tests/mono-api-integration-test-results.xml
 
 volumes:
   mongodb_test_data:
