@@ -46,4 +46,5 @@ Run the project locally. Please lanuch **MongoDB** on your local machine.
 ```code
 docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
 ```
-  
+
+The test results are saved under the `test-results` folder of `MonoApp`.
