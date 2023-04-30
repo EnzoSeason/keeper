@@ -2,9 +2,9 @@ using System.Net;
 using Mono.API.Models;
 using Xunit;
 
-namespace Mono.ITest.Controllers;
+namespace Mono.ITest;
 
-public class UserTests: IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
+public class UserScenarios: IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     private const string Uid1 = "f994d51c-d47e-482c-9b81-6577da89db7e";
     private const string Uid2 = "4d4bb79d-0916-41c0-83c1-36dddbd84a9d";
@@ -13,7 +13,7 @@ public class UserTests: IClassFixture<CustomWebApplicationFactory<Program>>, IDi
     private readonly HttpClient _client;
     private readonly MongoHelper _mongoHelper;
 
-    public UserTests(CustomWebApplicationFactory<Program> factory)
+    public UserScenarios(CustomWebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
         _mongoHelper = new MongoHelper();
