@@ -25,6 +25,8 @@ services:
   mono-api-integration-test:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDb__ConnectionString=mongodb://admin:pass@nosql-db:27017
+      - MongoDb__DatabaseName=MonoAppTest
     ports:
       - "5113:80"
     entrypoint:

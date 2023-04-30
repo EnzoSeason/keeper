@@ -6,9 +6,11 @@ public class MongoHelper
 {
     public IMongoDatabase Database { get; }
 
-    public const string ConnectionString = "mongodb://admin:pass@localhost:27018";
+    public static readonly string ConnectionString =
+        Environment.GetEnvironmentVariable("MongoDb__ConnectionString") ?? "mongodb://localhost:27017";
 
-    public const string DatabaseName = "MonoAppTest";
+    public static readonly string DatabaseName =
+        Environment.GetEnvironmentVariable("MongoDb__DatabaseName") ?? "MonoAppTest";
 
     public MongoHelper()
     {
