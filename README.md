@@ -9,26 +9,34 @@ A financial reporting tool
 
 There are 2 services:
 
-- Identity Service: It manages the user. Authentication is not included.
+- Configuring Service:
 
-- Reporting Service: It's composed by 2 parts
+  It manages the reporting configuration. The reporting configuration indicates how the report is created from the data source.
 
-  - **Reporting Controller**: It has 2 endpoint
+  It's a CRUD API.
 
-    - `POST`: It receives the data sources from the web app, clean up data, and write them into database.It returns nothing if success
-    
-    - `POST`: It receives the command that asks the App to read the data from database, create the report, and save the results into database
+  - Create a config: It must have a username and UID.
 
-    - `GET`: It returns the reporting results.
+  - Read a config
 
-  - **Reporting Service**:
+  - Update a config: Only the reporting configuration can be updated. Username and UID is immutable.
 
-    1. It maps the requests to the internal data structures.
+  - Delete a config: delete all the transactions and reports linked to it, too.
 
-    2. It creates the reports based on the local **user reporting config json**. This config file is attached to a user by his `user_id`
+- Reporting Service:
 
-    3. It saves the orginal data and reporting data into the database.
-    
+  It collects the transactions and build the report from them.
+
+  It follows CQRS architecture pattern.
+
+  - **Add transactions command**
+
+  - **Upload a CSV file of transaction command**
+
+  - **Build a report command**: It receives the command that asks the App to read the data from database, create the report, and save the results into database
+
+  - **Get a report query**: It returns the reporting result.
+
 ## Usage
 
 To run the project in Development mode on the local machine
@@ -46,5 +54,3 @@ Run the project locally. Please lanuch **MongoDB** on your local machine.
 ```code
 docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
 ```
-
-The test results are saved under the `test-results` folder of `MonoApp`.
