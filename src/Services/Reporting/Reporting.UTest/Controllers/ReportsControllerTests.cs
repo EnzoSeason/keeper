@@ -22,7 +22,7 @@ public class ReportsControllerTests
         var emptyFile = new FormFile(Stream.Null, 0, 0, "EmptyFile", "empty.txt");
         var command = new UploadTransactionFileCommand
         {
-            UserId = Guid.NewGuid(),
+            ConfigId = Guid.NewGuid(),
             FileDate = DateTime.UtcNow,
             File = emptyFile
         };
@@ -38,7 +38,7 @@ public class ReportsControllerTests
         var file = new FormFile(Stream.Null, 0, 1, "File", "file.txt");
         var command = new UploadTransactionFileCommand
         {
-            UserId = Guid.NewGuid(),
+            ConfigId = Guid.NewGuid(),
             FileDate = DateTime.UtcNow,
             File = file
         };

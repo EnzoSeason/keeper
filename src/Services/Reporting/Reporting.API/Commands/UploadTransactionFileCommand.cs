@@ -3,9 +3,9 @@ namespace Reporting.API.Commands;
 public record UploadTransactionFileCommand
 {
     /// <summary>
-    /// The ID of user who owns the transaction file
+    /// The ID of the configuration used for creating the report
     /// </summary>
-    public Guid UserId { get; init; }
+    public Guid ConfigId { get; init; }
     
     /// <summary>
     /// The datetime when the transactions happen. Measuring precisely in <b>months</b>.
