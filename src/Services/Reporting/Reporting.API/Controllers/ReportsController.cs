@@ -12,7 +12,7 @@ public class ReportsController: ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public ActionResult Upload([FromForm] UploadTransactionFileCommand command)
     {
-        // TODO: check if user id exists
+        // TODO: check if config id exists in database
 
         if (command.File.Length == 0)
         {
