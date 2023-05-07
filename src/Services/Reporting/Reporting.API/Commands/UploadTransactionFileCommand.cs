@@ -2,6 +2,8 @@ using MediatR;
 
 namespace Reporting.API.Commands;
 
+// DDD and CQRS patterns comment: Note that it is recommended to implement immutable Commands
+// In this case, its immutability is achieved by the record without setters
 public record UploadTransactionFileCommand: IRequest<bool>
 {
     /// <summary>
