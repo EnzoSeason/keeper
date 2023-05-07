@@ -1,15 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using Reporting.Domain.SeedWork;
 
-namespace Reporting.Domain.TransactionAggregate;
+namespace Reporting.Domain.TransactionModels;
 
 public class Transaction: IAggregateRoot, IValidatableObject
 {
     public Guid ConfigId { get; init; }
     
     public DateTime FileDate { get; init; }
-    
-    public IEnumerable<TransactionRow> Rows { get; set; }
+
+    public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
     
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -18,6 +18,7 @@ public class Transaction: IAggregateRoot, IValidatableObject
         if (!Rows.Any())
         {
             results.Add(new ValidationResult("Rows must contain data.", new[] { nameof(Rows) }));
+            return results;
         }
 
         var rowsMonths = Rows.Select(row => row.Date.Month).Distinct().ToList();
@@ -26,6 +27,7 @@ public class Transaction: IAggregateRoot, IValidatableObject
         {
             results.Add(
                 new ValidationResult("Rows must be the transactions of the same month.", new[] { nameof(Rows) }));
+            return results;
         }
 
         if (rowsMonths.First() != FileDate.Month)
@@ -37,4 +39,13 @@ public class Transaction: IAggregateRoot, IValidatableObject
 
         return results;
     }
+
+    public static TransactionEntity ToEntity(Transaction transaction) => new()
+    {
+        ConfigId = transaction.ConfigId,
+        FileDate = transaction.FileDate,
+        Rows = transaction.Rows
+            .Select(TransactionRow.ToEntity)
+            .ToList()
+    };
 }
