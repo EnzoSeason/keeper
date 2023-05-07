@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="CsvHelper" Version="30.0.1" />
         <PackageReference Include="MediatR" Version="12.0.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -18,6 +19,11 @@
       <Content Include="..\..\..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Reporting.Domain\Reporting.Domain.csproj" />
+      <ProjectReference Include="..\Reporting.Infrastructure\Reporting.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

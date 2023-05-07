@@ -6,4 +6,9 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="CsvHelper" Version="30.0.1" />
+      <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
+    </ItemGroup>
+
 </Project>

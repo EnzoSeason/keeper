@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using MediatR;
 
 namespace Reporting.API.Commands;
@@ -13,8 +14,9 @@ public record UploadTransactionFileCommand: IRequest<bool>
     
     /// <summary>
     /// The datetime when the transactions happen. Measuring precisely in <b>months</b>.
-    /// e.g. The uploaded file contains all the transactions of April, 2023.
+    /// For example, The uploaded file contains all the transactions of April, 2023.
     /// </summary>
+    [DefaultValue("2023/03/01")]
     public DateTime FileDate { get; init; }
     
     /// <summary>
