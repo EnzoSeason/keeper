@@ -20,9 +20,9 @@ public class Transaction: IAggregateRoot, IValidatableObject
             results.Add(new ValidationResult("Rows must contain data.", new[] { nameof(Rows) }));
         }
 
-        var rowsMonths = Rows.Select(row => row.Date.Month).Distinct();
+        var rowsMonths = Rows.Select(row => row.Date.Month).Distinct().ToList();
 
-        if (rowsMonths.Count() != 1)
+        if (rowsMonths.Count != 1)
         {
             results.Add(
                 new ValidationResult("Rows must be the transactions of the same month.", new[] { nameof(Rows) }));
