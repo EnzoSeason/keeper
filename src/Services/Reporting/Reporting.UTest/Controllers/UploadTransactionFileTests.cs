@@ -8,7 +8,7 @@ using Reporting.API.Controllers;
 
 namespace Reporting.UTest.Controllers;
 
-public class ReportsControllerTests
+public class UploadTransactionFileTests
 {
     private IMediator _mediator;
     private ReportsController _controller;
@@ -21,7 +21,7 @@ public class ReportsControllerTests
     }
     
     [Test]
-    public async Task UploadTransactionFile_NoContent_Success()
+    public async Task NoContent_Success()
     {
         var file = new FormFile(Stream.Null, 0, 1, "File", "file.csv");
         var command = new UploadTransactionFileCommand
@@ -39,7 +39,7 @@ public class ReportsControllerTests
     }
     
     [Test]
-    public async Task UploadTransactionFile_UnprocessableEntity_UploadCommandFailed()
+    public async Task UnprocessableEntity_UploadCommandFailed()
     {
         var file = new FormFile(Stream.Null, 0, 1, "File", "file.csv");
         var command = new UploadTransactionFileCommand
@@ -57,7 +57,7 @@ public class ReportsControllerTests
     }
         
     [Test]
-    public async Task UploadTransactionFile_BadRequest_FileIsEmpty()
+    public async Task BadRequest_FileIsEmpty()
     {
         var emptyFile = new FormFile(Stream.Null, 0, 0, "EmptyFile", "empty.txt");
         var command = new UploadTransactionFileCommand
@@ -74,7 +74,7 @@ public class ReportsControllerTests
     }
 
     [Test]
-    public async Task UploadTransactionFile_BadRequest_FileIsNotInCSV()
+    public async Task BadRequest_FileIsNotInCSV()
     {
         var file = new FormFile(Stream.Null, 0, 1, "File", "file.txt");
         var command = new UploadTransactionFileCommand
