@@ -1,6 +1,8 @@
+using MediatR;
+
 namespace Reporting.API.Commands;
 
-public record UploadTransactionFileCommand
+public record UploadTransactionFileCommand: IRequest<bool>
 {
     /// <summary>
     /// The ID of the configuration used for creating the report

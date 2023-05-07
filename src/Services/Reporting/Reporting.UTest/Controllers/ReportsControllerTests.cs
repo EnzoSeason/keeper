@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands;
 using Reporting.API.Controllers;
@@ -8,12 +10,14 @@ namespace Reporting.UTest.Controllers;
 
 public class ReportsControllerTests
 {
+    private IMediator _mediator;
     private ReportsController _controller;
 
     [SetUp]
     public void SetUp()
     {
-        _controller = new ReportsController();
+        _mediator = Substitute.For<IMediator>();
+        _controller = new ReportsController(_mediator);
     }
         
     [Test]

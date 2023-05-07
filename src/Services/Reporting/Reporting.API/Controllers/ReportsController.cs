@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Reporting.API.Commands;
 
@@ -7,10 +8,17 @@ namespace Reporting.API.Controllers;
 [Route("api/v1/[controller]")]
 public class ReportsController: ControllerBase
 {
+    private readonly IMediator _mediator;
+    
+    public ReportsController(IMediator mediator)
+    {
+        _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+    }
+
     [HttpPost("upload")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public ActionResult Upload([FromForm] UploadTransactionFileCommand command)
+    public async Task<IActionResult> Upload([FromForm] UploadTransactionFileCommand command)
     {
         // TODO: check if config id exists in database
 
@@ -22,6 +30,13 @@ public class ReportsController: ControllerBase
         if (Path.GetExtension(command.File.FileName).ToLower() != ".csv")
         {
             return BadRequest("Only the CSV file is accepted.");
+        }
+
+        var commandResult = await _mediator.Send(command);
+
+        if (!commandResult)
+        {
+            return BadRequest("Upload file command failed.");
         }
 
         return NoContent();
