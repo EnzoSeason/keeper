@@ -19,9 +19,45 @@ public class ReportsControllerTests
         _mediator = Substitute.For<IMediator>();
         _controller = new ReportsController(_mediator);
     }
+    
+    [Test]
+    public async Task UploadTransactionFile_NoContent_Success()
+    {
+        var file = new FormFile(Stream.Null, 0, 1, "File", "file.csv");
+        var command = new UploadTransactionFileCommand
+        {
+            ConfigId = Guid.NewGuid(),
+            FileDate = DateTime.UtcNow,
+            File = file
+        };
+        _mediator.Send(command).Returns(Task.FromResult(true));
+        
+        var response = await _controller.Upload(command);
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<NoContentResult>());
+    }
+    
+    [Test]
+    public async Task UploadTransactionFile_UnprocessableEntity_UploadCommandFailed()
+    {
+        var file = new FormFile(Stream.Null, 0, 1, "File", "file.csv");
+        var command = new UploadTransactionFileCommand
+        {
+            ConfigId = Guid.NewGuid(),
+            FileDate = DateTime.UtcNow,
+            File = file
+        };
+        _mediator.Send(command).Returns(Task.FromResult(false));
+        
+        var response = await _controller.Upload(command);
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<UnprocessableEntityObjectResult>());
+    }
         
     [Test]
-    public void BadRequest_FileIsEmpty()
+    public async Task UploadTransactionFile_BadRequest_FileIsEmpty()
     {
         var emptyFile = new FormFile(Stream.Null, 0, 0, "EmptyFile", "empty.txt");
         var command = new UploadTransactionFileCommand
@@ -30,14 +66,15 @@ public class ReportsControllerTests
             FileDate = DateTime.UtcNow,
             File = emptyFile
         };
-        var response = _controller.Upload(command);
+        
+        var response = await _controller.Upload(command);
         
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.InstanceOf<BadRequestObjectResult>());
     }
 
     [Test]
-    public void BadRequest_FileIsNotInCSV()
+    public async Task UploadTransactionFile_BadRequest_FileIsNotInCSV()
     {
         var file = new FormFile(Stream.Null, 0, 1, "File", "file.txt");
         var command = new UploadTransactionFileCommand
@@ -46,7 +83,8 @@ public class ReportsControllerTests
             FileDate = DateTime.UtcNow,
             File = file
         };
-        var response = _controller.Upload(command);
+        
+        var response = await _controller.Upload(command);
         
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.InstanceOf<BadRequestObjectResult>());

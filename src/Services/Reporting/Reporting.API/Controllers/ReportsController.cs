@@ -18,6 +18,7 @@ public class ReportsController: ControllerBase
     [HttpPost("upload")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
     public async Task<IActionResult> Upload([FromForm] UploadTransactionFileCommand command)
     {
         // TODO: check if config id exists in database
@@ -36,7 +37,7 @@ public class ReportsController: ControllerBase
 
         if (!commandResult)
         {
-            return BadRequest("Upload file command failed.");
+            return UnprocessableEntity("Upload file command failed.");
         }
 
         return NoContent();
