@@ -47,7 +47,7 @@ Date;Label;Amount;Currency;
         var expectedTransaction = new Transaction
         {
             ConfigId = configId,
-            FileDate = fileDate,
+            Date = fileDate,
             Rows = new List<TransactionRow>
             {
                 new()

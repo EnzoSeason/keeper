@@ -15,7 +15,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     public Guid ConfigId { get; init; }
     
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-    public DateTime FileDate { get; init; }
+    public DateTime Date { get; init; }
 
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
 
@@ -38,7 +38,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
             return results;
         }
 
-        if (rowsMonths.First() != FileDate.Month)
+        if (rowsMonths.First() != Date.Month)
         {
             results.Add(
                 new ValidationResult("The transaction date in rows doesn't match to the file date.",
@@ -52,12 +52,12 @@ public record Transaction: IAggregateRoot, IValidatableObject
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id && ConfigId.Equals(other.ConfigId) && FileDate.Equals(other.FileDate) &&
+        return Id == other.Id && ConfigId.Equals(other.ConfigId) && Date.Equals(other.Date) &&
                Rows.SequenceEqual(other.Rows);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Id, ConfigId, FileDate, Rows);
+        return HashCode.Combine(Id, ConfigId, Date, Rows);
     }
 }
