@@ -2,7 +2,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
 
-namespace Reporting.Domain.SeedWork;
+namespace Reporting.API.Commands.UploadTransactionFile;
 
 public class CustomDoubleConverter : DoubleConverter
 {

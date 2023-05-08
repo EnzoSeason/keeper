@@ -4,7 +4,7 @@ using CsvHelper.Configuration;
 using MediatR;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.SeedWork;
-using Reporting.Infrastructure.Repositories.TransactionRepository;
+using Reporting.Infrastructure.Repositories;
 
 namespace Reporting.API.Commands.UploadTransactionFile;
 
@@ -57,7 +57,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
 
         try
         {
-            _repository.InsertTransaction(TransactionDocument.From(transaction));
+            _repository.InsertTransaction(transaction);
         }
         catch
         {

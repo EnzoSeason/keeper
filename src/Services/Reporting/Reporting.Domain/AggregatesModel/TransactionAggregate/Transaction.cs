@@ -1,16 +1,24 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using Reporting.Domain.SeedWork;
 
 namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 
-public class Transaction: IAggregateRoot, IValidatableObject
+public record Transaction: IAggregateRoot, IValidatableObject
 {
+    [BsonId]
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? Id { get; set; }
+    
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid ConfigId { get; init; }
     
+    [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime FileDate { get; init; }
 
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
-    
+
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
         var results = new List<ValidationResult>();
@@ -38,5 +46,18 @@ public class Transaction: IAggregateRoot, IValidatableObject
         }
 
         return results;
+    }
+
+    public virtual bool Equals(Transaction? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Id == other.Id && ConfigId.Equals(other.ConfigId) && FileDate.Equals(other.FileDate) &&
+               Rows.SequenceEqual(other.Rows);
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, ConfigId, FileDate, Rows);
     }
 }

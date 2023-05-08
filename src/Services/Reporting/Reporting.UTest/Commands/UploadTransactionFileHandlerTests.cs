@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.UploadTransactionFile;
-using Reporting.Infrastructure.Repositories.TransactionRepository;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
+using Reporting.Infrastructure.Repositories;
 
 namespace Reporting.UTest.Commands;
 
@@ -44,11 +45,11 @@ Date;Label;Amount;Currency;
             File = _file
         };
 
-        var expectedTransactionEntity = new TransactionDocument
+        var expectedTransaction = new Transaction
         {
             ConfigId = configId,
             FileDate = fileDate,
-            Rows = new List<TransactionRowDocument>
+            Rows = new List<TransactionRow>
             {
                 new()
                 {
@@ -70,7 +71,7 @@ Date;Label;Amount;Currency;
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        await _repository.Received(1).InsertTransaction(expectedTransactionEntity);
+        await _repository.Received(1).InsertTransaction(expectedTransaction);
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
@@ -88,7 +89,7 @@ Date;Label;Amount;Currency;
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.False);
-        await _repository.Received(0).InsertTransaction(Arg.Any<TransactionDocument>());
+        await _repository.Received(0).InsertTransaction(Arg.Any<Transaction>());
     }
 
     [Test]
@@ -101,7 +102,7 @@ Date;Label;Amount;Currency;
         var stream = GetStream(normalRows);
         _file.OpenReadStream().Returns(stream);
 
-        _repository.InsertTransaction(Arg.Any<TransactionDocument>()).Returns(_ => throw new Exception());
+        _repository.InsertTransaction(Arg.Any<Transaction>()).Returns(_ => throw new Exception());
         
         var command = new UploadTransactionFileCommand
         {

@@ -1,9 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 
-public class TransactionRow: IValidatableObject
+public record TransactionRow: IValidatableObject
 {
+    [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime Date { get; set; }
     
     public string Label { get; set; }
