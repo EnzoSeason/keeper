@@ -6,13 +6,13 @@ namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 public record TransactionRow: IValidatableObject
 {
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
-    public DateTime Date { get; set; }
+    public DateTime Date { get; init; }
     
-    public string Label { get; set; }
+    public string Label { get; init; }
     
-    public double Amount { get; set; }
+    public double Amount { get; init; }
 
-    public string Currency { get; set; }
+    public string Currency { get; init; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
