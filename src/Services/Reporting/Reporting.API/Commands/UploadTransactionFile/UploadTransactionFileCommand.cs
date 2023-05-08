@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using MediatR;
 
-namespace Reporting.API.Commands;
+namespace Reporting.API.Commands.UploadTransactionFile;
 
 // DDD and CQRS patterns comment: Note that it is recommended to implement immutable Commands
 // In this case, its immutability is achieved by the record without setters

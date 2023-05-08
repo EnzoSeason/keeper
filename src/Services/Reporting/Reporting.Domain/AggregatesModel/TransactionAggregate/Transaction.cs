@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using Reporting.Domain.SeedWork;
 
-namespace Reporting.Domain.TransactionModels;
+namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 
 public class Transaction: IAggregateRoot, IValidatableObject
 {
@@ -39,13 +39,4 @@ public class Transaction: IAggregateRoot, IValidatableObject
 
         return results;
     }
-
-    public static TransactionDocument ToEntity(Transaction transaction) => new()
-    {
-        ConfigId = transaction.ConfigId,
-        FileDate = transaction.FileDate,
-        Rows = transaction.Rows
-            .Select(TransactionRow.ToEntity)
-            .ToList()
-    };
 }

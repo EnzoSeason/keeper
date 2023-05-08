@@ -1,7 +1,8 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
 
-namespace Reporting.Domain.TransactionModels;
+namespace Reporting.Infrastructure.Repositories.TransactionRepository;
 
 /// <summary>
 /// The document of Transaction saved in the MongoDB
@@ -32,6 +33,15 @@ public record TransactionDocument
     {
         return HashCode.Combine(Id, ConfigId, FileDate, Rows);
     }
+    
+    public static TransactionDocument From(Transaction transaction) => new()
+    {
+        ConfigId = transaction.ConfigId,
+        FileDate = transaction.FileDate,
+        Rows = transaction.Rows
+            .Select(TransactionRowDocument.From)
+            .ToList()
+    };
 }
 
 /// <summary>
@@ -47,4 +57,12 @@ public record TransactionRowDocument
     public double Amount { get; init; }
 
     public string Currency { get; init; }
+    
+    public static TransactionRowDocument From(TransactionRow row) => new()
+    {
+        Date = row.Date,
+        Label = row.Label,
+        Amount = row.Amount,
+        Currency = row.Currency
+    };
 }

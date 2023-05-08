@@ -1,8 +1,9 @@
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.SeedWork;
 
-namespace Reporting.Domain.TransactionModels;
+namespace Reporting.API.Commands.UploadTransactionFile;
 
 public sealed class TransactionRowCsvMap: ClassMap<TransactionRow>
 {

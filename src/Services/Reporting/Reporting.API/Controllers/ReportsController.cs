@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Reporting.API.Commands;
+using Reporting.API.Commands.UploadTransactionFile;
 
 namespace Reporting.API.Controllers;
 

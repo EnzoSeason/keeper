@@ -1,6 +1,4 @@
-using Reporting.Domain.TransactionModels;
-
-namespace Reporting.Infrastructure.Repositories;
+namespace Reporting.Infrastructure.Repositories.TransactionRepository;
 
 public interface ITransactionRepository
 {

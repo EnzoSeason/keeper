@@ -1,6 +1,6 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
-using Reporting.Infrastructure.Repositories;
+using Reporting.Infrastructure.Repositories.TransactionRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 

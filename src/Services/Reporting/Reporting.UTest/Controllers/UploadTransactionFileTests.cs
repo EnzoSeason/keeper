@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NUnit.Framework;
-using Reporting.API.Commands;
+using Reporting.API.Commands.UploadTransactionFile;
 using Reporting.API.Controllers;
 
 namespace Reporting.UTest.Controllers;

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Reporting.Domain.TransactionModels;
+namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 
 public class TransactionRow: IValidatableObject
 {
@@ -33,12 +33,4 @@ public class TransactionRow: IValidatableObject
         
         return results;
     }
-
-    public static TransactionRowDocument ToEntity(TransactionRow row) => new()
-    {
-        Date = row.Date,
-        Label = row.Label,
-        Amount = row.Amount,
-        Currency = row.Currency
-    };
 }

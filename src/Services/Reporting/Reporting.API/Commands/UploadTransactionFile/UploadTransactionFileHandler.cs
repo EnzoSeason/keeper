@@ -2,11 +2,11 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using MediatR;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.SeedWork;
-using Reporting.Domain.TransactionModels;
-using Reporting.Infrastructure.Repositories;
+using Reporting.Infrastructure.Repositories.TransactionRepository;
 
-namespace Reporting.API.Commands;
+namespace Reporting.API.Commands.UploadTransactionFile;
 
 public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFileCommand, bool>
 {
@@ -57,7 +57,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
 
         try
         {
-            _repository.InsertTransaction(Transaction.ToEntity(transaction));
+            _repository.InsertTransaction(TransactionDocument.From(transaction));
         }
         catch
         {

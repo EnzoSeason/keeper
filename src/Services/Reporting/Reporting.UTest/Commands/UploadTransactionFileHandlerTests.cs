@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
-using Reporting.API.Commands;
-using Reporting.Domain.TransactionModels;
-using Reporting.Infrastructure.Repositories;
+using Reporting.API.Commands.UploadTransactionFile;
+using Reporting.Infrastructure.Repositories.TransactionRepository;
 
 namespace Reporting.UTest.Commands;
 
