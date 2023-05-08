@@ -10,7 +10,7 @@ public record TransactionRow: IValidatableObject
     
     public string Label { get; init; }
     
-    public double Amount { get; init; }
+    public decimal Amount { get; init; }
 
     public string Currency { get; init; }
 

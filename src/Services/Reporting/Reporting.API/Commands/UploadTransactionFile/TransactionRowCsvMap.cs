@@ -16,19 +16,17 @@ public sealed class TransactionRowCsvMap: ClassMap<TransactionRow>
         Map(m => m.Label);
         
         Map(m => m.Amount)
-            .TypeConverter<CustomDoubleConverter>();
+            .TypeConverter<CustomDecimalConverter>();
         
         Map(m => m.Currency);
     }
 }
 
-public class CustomDoubleConverter : DoubleConverter
+public class CustomDecimalConverter : DecimalConverter
 {
     public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {
-        text = text?.Replace(",", ".");
-        
-        if (double.TryParse(text, out var result))
+        if (decimal.TryParse(text, out var result))
         {
             return result;
         }
