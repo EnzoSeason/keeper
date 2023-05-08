@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
