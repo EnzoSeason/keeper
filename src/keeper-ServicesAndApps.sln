@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting.Domain", "Service
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting.Infrastructure", "Services\Reporting\Reporting.Infrastructure\Reporting.Infrastructure.csproj", "{CCDC7A95-8938-447F-9A78-6E2A3C431D97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reporting.ITest", "Services\Reporting\Reporting.ITest\Reporting.ITest.csproj", "{79138466-9EB9-4BF1-9CC5-B475205A2851}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{CCDC7A95-8938-447F-9A78-6E2A3C431D97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCDC7A95-8938-447F-9A78-6E2A3C431D97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCDC7A95-8938-447F-9A78-6E2A3C431D97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79138466-9EB9-4BF1-9CC5-B475205A2851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79138466-9EB9-4BF1-9CC5-B475205A2851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79138466-9EB9-4BF1-9CC5-B475205A2851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79138466-9EB9-4BF1-9CC5-B475205A2851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
