@@ -36,18 +36,17 @@ Date;Label;Amount;Currency;
         _file.OpenReadStream().Returns(stream);
 
         var configId = Guid.NewGuid();
-        var fileDate = DateTime.Parse("2023-03-29");
         var command = new UploadTransactionFileCommand
         {
             ConfigId = configId,
-            FileDate = fileDate,
+            Month = 3,
             File = _file
         };
 
         var expectedTransaction = new Transaction
         {
             ConfigId = configId,
-            Date = fileDate,
+            Month = 3,
             Rows = new List<TransactionRow>
             {
                 new()
@@ -74,14 +73,14 @@ Date;Label;Amount;Currency;
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
-    public async Task InvalidTransaction_ReturnFalse(Stream stream, DateTime fileDate)
+    public async Task InvalidTransaction_ReturnFalse(Stream stream, int month)
     {
         _file.OpenReadStream().Returns(stream);
         
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = fileDate,
+            Month = month,
             File = _file
         };
         
@@ -106,7 +105,7 @@ Date;Label;Amount;Currency;
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.Parse("2023-03-29"),
+            Month = 3,
             File = _file
         };
         
@@ -121,7 +120,7 @@ Date;Label;Amount;Currency;
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.Parse("2023-03-29"),
+            Month = 3,
             File = _file
         };
         var cts = new CancellationTokenSource();
@@ -133,9 +132,10 @@ Date;Label;Amount;Currency;
 
     private static IEnumerable<TestCaseData> GetInvalidTransactionTestCases()
     {
-        var fileDate = DateTime.Parse("2023-03-29");
+        const int transactionMonth = 3;
+        
         var emptyRowStream = new MemoryStream();
-        yield return new TestCaseData(emptyRowStream, fileDate).SetName("Transaction rows are empty.");
+        yield return new TestCaseData(emptyRowStream, transactionMonth).SetName("Transaction rows are empty.");
         
         const string differentMonthsRows = @"
 Date;Label;Amount;Currency;
@@ -143,14 +143,14 @@ Date;Label;Amount;Currency;
 29/04/2023;PYMT;16,08;EUR;
 ";
         var differentMonthsStream = GetStream(differentMonthsRows);
-        yield return new TestCaseData(differentMonthsStream, fileDate).SetName("Transaction rows are not in the same month.");
+        yield return new TestCaseData(differentMonthsStream, transactionMonth).SetName("Transaction rows are not in the same month.");
         
         const string normalRows = @"
 Date;Label;Amount;Currency;
 29/03/2023;FRANPRIX;-6,15;EUR;
 ";
         var normalStream = GetStream(normalRows);
-        yield return new TestCaseData(normalStream, DateTime.Parse("2023-04-29"))
+        yield return new TestCaseData(normalStream, 4)
             .SetName("The date in transaction rows is different from the file date.");
     }
 

@@ -13,14 +13,14 @@ public record UploadTransactionFileCommand: IRequest<bool>
     public Guid ConfigId { get; init; }
     
     /// <summary>
-    /// The datetime when the transactions happen. Measuring precisely in <b>months</b>.
-    /// For example, The uploaded file contains all the transactions of April, 2023.
+    /// The month when the transactions happen.
+    /// For example, March is 3.
     /// </summary>
-    [DefaultValue("2023/03/01")]
-    public DateTime FileDate { get; init; }
+    [DefaultValue("3")]
+    public int Month { get; init; }
     
     /// <summary>
     /// The transaction file in CSV format
     /// </summary>
-    public IFormFile File { get; init; }
+    public IFormFile File { get; init; } = null!;
 }

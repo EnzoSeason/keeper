@@ -27,7 +27,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.UtcNow,
+            Month = 3,
             File = file
         };
         _mediator.Send(command).Returns(Task.FromResult(true));
@@ -45,7 +45,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.UtcNow,
+            Month = 3,
             File = file
         };
         _mediator.Send(command).Returns(Task.FromResult(false));
@@ -63,7 +63,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.UtcNow,
+            Month = 3,
             File = emptyFile
         };
         
@@ -80,7 +80,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
-            FileDate = DateTime.UtcNow,
+            Month = 3,
             File = file
         };
         
