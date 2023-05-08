@@ -4,12 +4,12 @@ namespace Reporting.Infrastructure.Repositories;
 
 public interface ITransactionRepository
 {
-    Task InsertTransaction(TransactionEntity transaction);
+    Task InsertTransaction(TransactionDocument transaction);
 }
 
 public class TransactionRepository: ITransactionRepository
 {
-    public Task InsertTransaction(TransactionEntity transaction)
+    public Task InsertTransaction(TransactionDocument transaction)
     {
         throw new NotImplementedException();
     }

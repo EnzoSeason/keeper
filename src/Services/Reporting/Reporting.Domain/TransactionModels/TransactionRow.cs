@@ -34,7 +34,7 @@ public class TransactionRow: IValidatableObject
         return results;
     }
 
-    public static TransactionRowEntity ToEntity(TransactionRow row) => new()
+    public static TransactionRowDocument ToEntity(TransactionRow row) => new()
     {
         Date = row.Date,
         Label = row.Label,

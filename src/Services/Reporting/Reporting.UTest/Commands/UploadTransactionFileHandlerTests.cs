@@ -45,11 +45,11 @@ Date;Label;Amount;Currency;
             File = _file
         };
 
-        var expectedTransactionEntity = new TransactionEntity
+        var expectedTransactionEntity = new TransactionDocument
         {
             ConfigId = configId,
             FileDate = fileDate,
-            Rows = new List<TransactionRowEntity>
+            Rows = new List<TransactionRowDocument>
             {
                 new()
                 {
@@ -89,7 +89,7 @@ Date;Label;Amount;Currency;
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.False);
-        await _repository.Received(0).InsertTransaction(Arg.Any<TransactionEntity>());
+        await _repository.Received(0).InsertTransaction(Arg.Any<TransactionDocument>());
     }
 
     [Test]
@@ -102,7 +102,7 @@ Date;Label;Amount;Currency;
         var stream = GetStream(normalRows);
         _file.OpenReadStream().Returns(stream);
 
-        _repository.InsertTransaction(Arg.Any<TransactionEntity>()).Returns(_ => throw new Exception());
+        _repository.InsertTransaction(Arg.Any<TransactionDocument>()).Returns(_ => throw new Exception());
         
         var command = new UploadTransactionFileCommand
         {

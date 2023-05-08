@@ -40,7 +40,7 @@ public class Transaction: IAggregateRoot, IValidatableObject
         return results;
     }
 
-    public static TransactionEntity ToEntity(Transaction transaction) => new()
+    public static TransactionDocument ToEntity(Transaction transaction) => new()
     {
         ConfigId = transaction.ConfigId,
         FileDate = transaction.FileDate,
