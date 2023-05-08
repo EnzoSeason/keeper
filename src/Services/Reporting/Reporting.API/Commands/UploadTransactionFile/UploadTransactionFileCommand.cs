@@ -16,7 +16,7 @@ public record UploadTransactionFileCommand: IRequest<bool>
     /// The year when the transactions happen.
     /// For example, 2023.
     /// </summary>
-    [DefaultValue("3")]
+    [DefaultValue("2023")]
     public int Year { get; init; }
     
     /// <summary>
