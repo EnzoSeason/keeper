@@ -116,6 +116,22 @@ Date;Label;Amount;Currency;
         Assert.That(response, Is.False);
     }
 
+    [Test]
+    public async Task CancellationRequested_ReturnFalse()
+    {
+        var command = new UploadTransactionFileCommand
+        {
+            ConfigId = Guid.NewGuid(),
+            FileDate = DateTime.Parse("2023-03-29"),
+            File = _file
+        };
+        var cts = new CancellationTokenSource();
+        cts.Cancel();
+        
+        var response = await _handler.Handle(command, cts.Token);
+        Assert.That(response, Is.False);
+    }
+
     private static IEnumerable<TestCaseData> GetInvalidTransactionTestCases()
     {
         var fileDate = DateTime.Parse("2023-03-29");

@@ -19,6 +19,11 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
 
     public Task<bool> Handle(UploadTransactionFileCommand request, CancellationToken cancellationToken)
     {
+        if (cancellationToken.IsCancellationRequested)
+        {
+            return Task.FromResult(false);
+        }
+        
         var transaction = new Transaction
         {
             ConfigId = request.ConfigId,
