@@ -8,7 +8,7 @@ using Reporting.API.Controllers;
 
 namespace Reporting.UTest.Controllers;
 
-public class UploadTransactionFileTests
+public class UploadTransactionFileEndpointTests
 {
     private IMediator _mediator;
     private ReportsController _controller;
@@ -27,6 +27,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
+            Year = 2023,
             Month = 3,
             File = file
         };
@@ -45,6 +46,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
+            Year = 2023,
             Month = 3,
             File = file
         };
@@ -63,6 +65,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
+            Year = 2023,
             Month = 3,
             File = emptyFile
         };
@@ -80,6 +83,7 @@ public class UploadTransactionFileTests
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
+            Year = 2023,
             Month = 3,
             File = file
         };

@@ -26,6 +26,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
         var transaction = new Transaction
         {
             ConfigId = request.ConfigId,
+            Year = request.Year,
             Month = request.Month
         };
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)

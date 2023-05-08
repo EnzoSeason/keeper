@@ -39,6 +39,7 @@ Date;Label;Amount;Currency;
         var command = new UploadTransactionFileCommand
         {
             ConfigId = configId,
+            Year = 2023,
             Month = 3,
             File = _file
         };
@@ -46,6 +47,7 @@ Date;Label;Amount;Currency;
         var expectedTransaction = new Transaction
         {
             ConfigId = configId,
+            Year = 2023,
             Month = 3,
             Rows = new List<TransactionRow>
             {
@@ -73,13 +75,14 @@ Date;Label;Amount;Currency;
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
-    public async Task InvalidTransaction_ReturnFalse(Stream stream, int month)
+    public async Task InvalidTransaction_ReturnFalse(Stream stream, int year, int month)
     {
         _file.OpenReadStream().Returns(stream);
         
         var command = new UploadTransactionFileCommand
         {
             ConfigId = Guid.NewGuid(),
+            Year = year,
             Month = month,
             File = _file
         };
@@ -132,10 +135,21 @@ Date;Label;Amount;Currency;
 
     private static IEnumerable<TestCaseData> GetInvalidTransactionTestCases()
     {
+        const int transactionYear = 2023;
         const int transactionMonth = 3;
         
         var emptyRowStream = new MemoryStream();
-        yield return new TestCaseData(emptyRowStream, transactionMonth).SetName("Transaction rows are empty.");
+        yield return new TestCaseData(emptyRowStream, transactionYear, transactionMonth)
+            .SetName("Transaction rows are empty.");
+        
+        const string differentYearsRows = @"
+Date;Label;Amount;Currency;
+29/03/2023;FRANPRIX;-6,15;EUR;
+29/03/2024;PYMT;16,08;EUR;
+";
+        var differentYearsStream = GetStream(differentYearsRows);
+        yield return new TestCaseData(differentYearsStream, transactionYear, transactionMonth)
+            .SetName("Transaction rows are not in the same year.");
         
         const string differentMonthsRows = @"
 Date;Label;Amount;Currency;
@@ -143,15 +157,24 @@ Date;Label;Amount;Currency;
 29/04/2023;PYMT;16,08;EUR;
 ";
         var differentMonthsStream = GetStream(differentMonthsRows);
-        yield return new TestCaseData(differentMonthsStream, transactionMonth).SetName("Transaction rows are not in the same month.");
+        yield return new TestCaseData(differentMonthsStream, transactionYear, transactionMonth)
+            .SetName("Transaction rows are not in the same month.");
         
-        const string normalRows = @"
+        const string normalRowsV1 = @"
 Date;Label;Amount;Currency;
 29/03/2023;FRANPRIX;-6,15;EUR;
 ";
-        var normalStream = GetStream(normalRows);
-        yield return new TestCaseData(normalStream, 4)
-            .SetName("The date in transaction rows is different from the file date.");
+        var normalStreamV1 = GetStream(normalRowsV1);
+        yield return new TestCaseData(normalStreamV1, 2024, transactionMonth)
+            .SetName("The year in transaction rows is different from the one in metadata.");
+        
+        const string normalRowsV2 = @"
+Date;Label;Amount;Currency;
+29/03/2023;FRANPRIX;-6,15;EUR;
+";
+        var normalStream = GetStream(normalRowsV2);
+        yield return new TestCaseData(normalStream, transactionYear, 4)
+            .SetName("The month in transaction rows is different from the one in metadata.");
     }
 
     private static MemoryStream GetStream(string data)

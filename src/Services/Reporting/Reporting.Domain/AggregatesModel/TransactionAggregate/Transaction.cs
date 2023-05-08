@@ -14,6 +14,8 @@ public record Transaction: IAggregateRoot, IValidatableObject
     [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid ConfigId { get; init; }
     
+    public int Year { get; init; }
+    
     public int Month { get; init; }
 
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
@@ -28,19 +30,28 @@ public record Transaction: IAggregateRoot, IValidatableObject
             return results;
         }
 
+        var rowsYears = Rows.Select(row => row.Date.Year).Distinct().ToList();
         var rowsMonths = Rows.Select(row => row.Date.Month).Distinct().ToList();
 
-        if (rowsMonths.Count != 1)
+        if (rowsYears.Count != 1 || rowsMonths.Count != 1)
         {
             results.Add(
-                new ValidationResult("Rows must be the transactions of the same month.", new[] { nameof(Rows) }));
+                new ValidationResult("Rows must be the transactions of the same month in the same year.",
+                    new[] { nameof(Rows) }));
             return results;
+        }
+        
+        if (rowsYears.First() != Year)
+        {
+            results.Add(
+                new ValidationResult("The transaction year in rows doesn't match to the one in metadata.",
+                    new[] { nameof(Rows) }));
         }
 
         if (rowsMonths.First() != Month)
         {
             results.Add(
-                new ValidationResult("The transaction date in rows doesn't match to the file date.",
+                new ValidationResult("The transaction month in rows doesn't match to the one in metadata.",
                     new[] { nameof(Rows) }));
         }
 
