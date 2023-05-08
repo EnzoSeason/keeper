@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Infrastructure.Repositories;
+using Reporting.Infrastructure.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,9 @@ builder.Services.AddMediatR(cfg => {
 
 // Custom Services
 builder.Services.AddSingleton<ITransactionRepository, TransactionRepository>();
+
+// Custom Configurations
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));
 
 var app = builder.Build();
 
