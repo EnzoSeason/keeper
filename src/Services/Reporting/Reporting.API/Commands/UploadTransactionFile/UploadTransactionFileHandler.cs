@@ -2,6 +2,7 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using MediatR;
+using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.SeedWork;
 
@@ -10,10 +11,12 @@ namespace Reporting.API.Commands.UploadTransactionFile;
 public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFileCommand, bool>
 {
     private readonly ITransactionRepository _repository;
+    private readonly IClock _clock;
 
-    public UploadTransactionFileHandler(ITransactionRepository repository)
+    public UploadTransactionFileHandler(ITransactionRepository repository, IClock clock)
     {
         _repository = repository;
+        _clock = clock;
     }
 
     public Task<bool> Handle(UploadTransactionFileCommand request, CancellationToken cancellationToken)
@@ -27,7 +30,8 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
         {
             ConfigId = request.ConfigId,
             Year = request.Year,
-            Month = request.Month
+            Month = request.Month,
+            Version = _clock.Now.Millisecond
         };
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
         {

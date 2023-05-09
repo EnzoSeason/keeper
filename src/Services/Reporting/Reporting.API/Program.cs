@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Infrastructure.Repositories;
 using Reporting.Infrastructure.Settings;
@@ -31,6 +32,7 @@ builder.Services.AddMediatR(cfg => {
 
 // Custom Services
 builder.Services.AddSingleton<ITransactionRepository, TransactionRepository>();
+builder.Services.AddSingleton<IClock, Clock>();
 
 // Custom Configurations
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));

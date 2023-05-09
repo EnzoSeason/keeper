@@ -18,6 +18,11 @@ public record Transaction: IAggregateRoot, IValidatableObject
     
     public int Month { get; init; }
 
+    /// <summary>
+    /// The creation datetime in millisecond 
+    /// </summary>
+    public int Version { get; init; }
+
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -62,12 +67,16 @@ public record Transaction: IAggregateRoot, IValidatableObject
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id && ConfigId.Equals(other.ConfigId) && Month.Equals(other.Month) &&
+        return Id == other.Id && 
+               ConfigId.Equals(other.ConfigId) && 
+               Year == other.Year && 
+               Month == other.Month &&
+               Version == other.Version && 
                Rows.SequenceEqual(other.Rows);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Id, ConfigId, Month, Rows);
+        return HashCode.Combine(ConfigId, Year, Month, Version);
     }
 }

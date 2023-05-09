@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.UploadTransactionFile;
+using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 
 namespace Reporting.UTest.Commands;
@@ -10,6 +11,7 @@ public class UploadTransactionFileHandlerTests
 {
     private IFormFile _file;
     private ITransactionRepository _repository;
+    private IClock _clock;
     private UploadTransactionFileHandler _handler;
 
     [SetUp]
@@ -17,7 +19,10 @@ public class UploadTransactionFileHandlerTests
     {
         _file = Substitute.For<IFormFile>();
         _repository = Substitute.For<ITransactionRepository>();
-        _handler = new UploadTransactionFileHandler(_repository);
+        _clock = Substitute.For<IClock>();
+        _clock.Now.Returns(DateTime.MinValue);
+        
+        _handler = new UploadTransactionFileHandler(_repository, _clock);
     }
 
     [Test]
@@ -49,6 +54,7 @@ Date;Label;Amount;Currency;
             ConfigId = configId,
             Year = 2023,
             Month = 3,
+            Version = _clock.Now.Millisecond,
             Rows = new List<TransactionRow>
             {
                 new()
