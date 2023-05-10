@@ -13,7 +13,10 @@ public class ReportingScenarios : IClassFixture<CustomWebApplicationFactory<Prog
         _dbTestInstance = new MongoDbTestInstance();
     }
 
-    public void Dispose() => _dbTestInstance.Database.DropCollection(MongoDbTestInstance.TransactionCollectionName);
+    public void Dispose()
+    { 
+        _dbTestInstance.Client.DropDatabase(MongoDbTestInstance.DatabaseName);
+    }
 
     [Fact]
     public async Task Post_UploadTransactionFile()
