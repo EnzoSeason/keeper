@@ -39,6 +39,7 @@ Date;Label;Amount;Currency;
 ";
         var stream = GetStream(rows);
         _file.OpenReadStream().Returns(stream);
+        _file.FileName.Returns("file.csv");
 
         var configId = Guid.NewGuid();
         var command = new UploadTransactionFileCommand
@@ -55,6 +56,11 @@ Date;Label;Amount;Currency;
             Year = 2023,
             Month = 3,
             Version = _clock.Now.Millisecond,
+            Origin = new Origin
+            {
+                Type = OriginType.File,
+                Description = _file.FileName
+            },
             Rows = new List<TransactionRow>
             {
                 new()

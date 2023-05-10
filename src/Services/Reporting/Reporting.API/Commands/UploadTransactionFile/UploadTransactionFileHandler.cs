@@ -31,8 +31,16 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             ConfigId = request.ConfigId,
             Year = request.Year,
             Month = request.Month,
-            Version = _clock.Now.Millisecond
+            Version = _clock.Now.Millisecond,
+            Origin = new Origin
+            {
+                Type = OriginType.File,
+                Description = request.File.FileName
+            }
         };
+        
+        // TODO: Replace the hardcoded csv config by the configuration service
+        
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Delimiter = ";"

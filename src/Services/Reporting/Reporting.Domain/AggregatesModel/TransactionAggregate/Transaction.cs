@@ -22,6 +22,8 @@ public record Transaction: IAggregateRoot, IValidatableObject
     /// The creation datetime in millisecond 
     /// </summary>
     public int Version { get; init; }
+    
+    public Origin Origin { get; init; }
 
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
 
@@ -70,13 +72,14 @@ public record Transaction: IAggregateRoot, IValidatableObject
         return Id == other.Id && 
                ConfigId.Equals(other.ConfigId) && 
                Year == other.Year && 
-               Month == other.Month &&
+               Month == other.Month && 
                Version == other.Version && 
+               Origin.Equals(other.Origin) && 
                Rows.SequenceEqual(other.Rows);
     }
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(ConfigId, Year, Month, Version);
+        return HashCode.Combine(ConfigId, Year, Month, Version, Origin);
     }
 }
