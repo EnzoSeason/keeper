@@ -23,7 +23,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     /// </summary>
     public long Version { get; init; }
     
-    public Origin Origin { get; init; }
+    public Origin Origin { get; init; } = null!;
 
     public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
 
