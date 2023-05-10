@@ -31,7 +31,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             ConfigId = request.ConfigId,
             Year = request.Year,
             Month = request.Month,
-            Version = _clock.Now.Millisecond,
+            Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
             Origin = new Origin
             {
                 Type = OriginType.File,

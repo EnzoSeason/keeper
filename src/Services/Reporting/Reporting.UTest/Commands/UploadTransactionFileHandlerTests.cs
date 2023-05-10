@@ -20,7 +20,7 @@ public class UploadTransactionFileHandlerTests
         _file = Substitute.For<IFormFile>();
         _repository = Substitute.For<ITransactionRepository>();
         _clock = Substitute.For<IClock>();
-        _clock.Now.Returns(DateTime.MinValue);
+        _clock.Now.Returns(DateTime.Parse("2023/03/03"));
         
         _handler = new UploadTransactionFileHandler(_repository, _clock);
     }
@@ -55,7 +55,7 @@ Date;Label;Amount;Currency;
             ConfigId = configId,
             Year = 2023,
             Month = 3,
-            Version = _clock.Now.Millisecond,
+            Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
             Origin = new Origin
             {
                 Type = OriginType.File,

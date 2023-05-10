@@ -21,7 +21,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     /// <summary>
     /// The creation datetime in millisecond 
     /// </summary>
-    public int Version { get; init; }
+    public long Version { get; init; }
     
     public Origin Origin { get; init; }
 
