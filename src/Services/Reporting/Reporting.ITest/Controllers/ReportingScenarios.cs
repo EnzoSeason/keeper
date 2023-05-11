@@ -1,3 +1,5 @@
+using System.Net;
+using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Xunit;
 
 namespace Reporting.ITest.Controllers;
@@ -19,9 +21,32 @@ public class ReportingScenarios : IClassFixture<CustomWebApplicationFactory<Prog
     }
 
     [Fact]
-    public async Task Post_UploadTransactionFile()
+    public async Task Post_UploadTransactionFile_Success()
     {
         const string url = "api/v1/reports/upload";
+        var formData = GetRequest();
+
+        var response = await _client.PostAsync(url, formData);
+
+        response.EnsureSuccessStatusCode();
+    }
+
+    [Fact]
+    public async Task Post_UploadTransactionFile_FileAlreadyExists_Failed()
+    {
+        const string url = "api/v1/reports/upload";
+        var formData = GetRequest();
+        
+        // Send the same request twice
+        // Simulate the case that the transaction exists in the database
+        await _client.PostAsync(url, formData);
+        var response = await _client.PostAsync(url, formData);
+        
+        Assert.True(response.StatusCode == HttpStatusCode.UnprocessableEntity);
+    }
+    
+    private static MultipartFormDataContent GetRequest()
+    {
         const string rows = @"
 Date;Label;Amount;Currency;
 29/03/2023;FRANPRIX;-6,15;EUR;
@@ -33,10 +58,7 @@ Date;Label;Amount;Currency;
         formData.Add(new StringContent("2023"), "Year");
         formData.Add(new StringContent("3"), "Month");
         formData.Add(new StreamContent(GetStream(rows)), "File", "test.csv");
-
-        var response = await _client.PostAsync(url, formData);
-
-        response.EnsureSuccessStatusCode();
+        return formData;
     }
     
     private static MemoryStream GetStream(string data)
