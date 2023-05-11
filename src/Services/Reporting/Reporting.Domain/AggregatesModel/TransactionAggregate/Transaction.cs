@@ -11,7 +11,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set; }
     
-    [BsonGuidRepresentation(GuidRepresentation.Standard)]
+    [BsonRepresentation(BsonType.String)]
     public Guid ConfigId { get; init; }
     
     public int Year { get; init; }
