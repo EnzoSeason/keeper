@@ -19,11 +19,22 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
         _clock = clock;
     }
 
-    public Task<bool> Handle(UploadTransactionFileCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(UploadTransactionFileCommand request, CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
         {
-            return Task.FromResult(false);
+            return false;
+        }
+
+        var origin = new Origin
+        {
+            Type = OriginType.File,
+            Description = request.File.FileName
+        };
+
+        if (await _repository.IsFound(request.ConfigId, request.Year, request.Month, origin))
+        {
+            return false;
         }
         
         var transaction = new Transaction
@@ -32,11 +43,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             Year = request.Year,
             Month = request.Month,
             Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
-            Origin = new Origin
-            {
-                Type = OriginType.File,
-                Description = request.File.FileName
-            }
+            Origin = origin
         };
         
         // TODO: Replace the hardcoded csv config by the configuration service
@@ -64,19 +71,19 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
         if (!DomainModelValidator<Transaction>.TryValidate(transaction, out var validationResults))
         {
             // TODO: Log the validation results
-            return Task.FromResult(false);
+            return false;
         }
 
         try
         {
-            _repository.InsertOne(transaction);
+            await _repository.InsertOne(transaction);
         }
         catch
         {
             // TODO: Log the error
-            return Task.FromResult(false);
+            return false;
         }
 
-        return Task.FromResult(true);
+        return true;
     }
 }
