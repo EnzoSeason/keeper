@@ -35,4 +35,16 @@ public record TransactionRow: IValidatableObject
         
         return results;
     }
+
+    public virtual bool Equals(TransactionRow? other)
+    {
+        if (ReferenceEquals(null, other)) return false;
+        if (ReferenceEquals(this, other)) return true;
+        return Date.Equals(other.Date) && Label == other.Label && Amount == other.Amount && Currency == other.Currency;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Date, Label, Amount, Currency);
+    }
 }
