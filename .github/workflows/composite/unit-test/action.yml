@@ -1,0 +1,33 @@
+name: unit-test
+description: "Run unit test in CI"
+
+inputs:
+  dotnet_version:
+    description: "Version of dotnet to use for testing"
+    required: true
+  project_path:
+    description: "Path to project"
+    required: true
+  tests_path:
+    description: "Path to test project"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - name: Setup .NET
+    uses: actions/setup-dotnet@v3
+    with:
+      dotnet-version: ${{ inputs.dotnet_version }}
+  
+  - name: Run unit tests
+    shell: bash
+    run: |
+      cd src
+      dotnet restore "keeper-ServicesAndApps.sln"
+      cd ${{ inputs.project_path }}
+      dotnet build --no-restore
+      cd -
+      cd ${{ inputs.tests_path }}
+      dotnet build --no-restore
+      dotnet test --no-build -v=normal

@@ -1,0 +1,26 @@
+name: reporting-api
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  DOTNET_VERSION: 7.0.x
+  PROJECT_PATH: Services/Reporting/Reporting.API
+  TESTS_PATH: Services/Reporting/Reporting.UTest
+
+jobs:
+  UnitTests:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - uses: ./.github/workflows/composite/unit-test
+      with:
+        dotnet_version: ${{ env.DOTNET_VERSION }}
+        project_path: ${{ env.PROJECT_PATH }}
+        tests_path: ${{ env.TESTS_PATH }}
