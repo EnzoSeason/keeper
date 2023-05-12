@@ -79,15 +79,11 @@ Date;Label;Amount;Currency;
                 }
             }
         };
-        
-        var received = false;
-        _repository.When(r => r.InsertOne(Arg.Is<Transaction>(t => t.Rows.SequenceEqual(expectedTransaction.Rows))))
-            .Do(_ => received = true);
 
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        Assert.That(received, Is.True);
+        await _repository.Received().InsertOne(Arg.Is(expectedTransaction));
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
