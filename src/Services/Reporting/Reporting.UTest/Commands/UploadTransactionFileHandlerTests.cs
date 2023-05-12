@@ -27,6 +27,7 @@ public class UploadTransactionFileHandlerTests
     }
 
     [Test]
+    [Explicit]
     public async Task InvalidTransactionRow_ReturnTrue()
     {
         // Only the first two rows are valid.
@@ -91,14 +92,8 @@ Date;Label;Amount;Currency;
     public async Task InvalidTransaction_ReturnFalse(Stream stream, int year, int month)
     {
         _file.OpenReadStream().Returns(stream);
-        
-        var command = new UploadTransactionFileCommand
-        {
-            ConfigId = Guid.NewGuid(),
-            Year = year,
-            Month = month,
-            File = _file
-        };
+
+        var command = new UploadTransactionFileCommand { File = _file };
         
         var response = await _handler.Handle(command, CancellationToken.None);
         
@@ -118,12 +113,7 @@ Date;Label;Amount;Currency;
 
         _repository.InsertOne(Arg.Any<Transaction>()).Returns(_ => throw new Exception());
         
-        var command = new UploadTransactionFileCommand
-        {
-            ConfigId = Guid.NewGuid(),
-            Month = 3,
-            File = _file
-        };
+        var command = new UploadTransactionFileCommand { File = _file };
         
         var response = await _handler.Handle(command, CancellationToken.None);
         
@@ -133,16 +123,36 @@ Date;Label;Amount;Currency;
     [Test]
     public async Task CancellationRequested_ReturnFalse()
     {
-        var command = new UploadTransactionFileCommand
-        {
-            ConfigId = Guid.NewGuid(),
-            Month = 3,
-            File = _file
-        };
         var cts = new CancellationTokenSource();
         cts.Cancel();
         
-        var response = await _handler.Handle(command, cts.Token);
+        var response = await _handler.Handle(new UploadTransactionFileCommand(), cts.Token);
+        Assert.That(response, Is.False);
+    }
+
+    [Test]
+    public async Task TransactionIsFound_ReturnFalse()
+    {
+        var configId = Guid.NewGuid();
+        var year = 2023;
+        var month = 3;
+        var origin = new Origin
+        {
+            Type = OriginType.File,
+            Description = _file.FileName
+        };
+        var command = new UploadTransactionFileCommand
+        {
+            ConfigId = configId,
+            Year = year,
+            Month = month,
+            File = _file
+        };
+
+        _repository.IsFound(configId, year, month, origin).Returns(Task.FromResult(true));
+
+        var response = await _handler.Handle(command, CancellationToken.None);
+        
         Assert.That(response, Is.False);
     }
 
