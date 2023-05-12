@@ -196,7 +196,8 @@ Date;Label;Amount;Currency;
         
         writer.Write(data);
         writer.Flush();
-        stream.Position = 0;
+        
+        stream.Seek(0, SeekOrigin.Begin);
 
         return stream;
     }
