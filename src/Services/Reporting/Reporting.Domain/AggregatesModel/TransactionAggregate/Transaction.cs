@@ -25,7 +25,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     
     public Origin Origin { get; init; } = null!;
 
-    public IList<TransactionRow> Rows { get; set; } = new List<TransactionRow>();
+    public IEnumerable<TransactionRow> Rows { get; set; } = null!;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
