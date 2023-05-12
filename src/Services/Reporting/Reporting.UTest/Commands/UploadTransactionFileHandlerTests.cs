@@ -27,7 +27,6 @@ public class UploadTransactionFileHandlerTests
     }
 
     [Test]
-    [Explicit]
     public async Task InvalidTransactionRow_ReturnTrue()
     {
         // Only the first two rows are valid.
