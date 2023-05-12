@@ -12,7 +12,7 @@ env:
   TESTS_PATH: Services/Reporting/Reporting.UTest
 
 jobs:
-  UnitTests:
+  unit_test:
     
     runs-on: ubuntu-latest
     
