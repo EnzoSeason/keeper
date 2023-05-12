@@ -64,22 +64,4 @@ public record Transaction: IAggregateRoot, IValidatableObject
 
         return results;
     }
-
-    public virtual bool Equals(Transaction? other)
-    {
-        if (ReferenceEquals(null, other)) return false;
-        if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id && 
-               ConfigId.Equals(other.ConfigId) && 
-               Year == other.Year && 
-               Month == other.Month && 
-               Version == other.Version && 
-               Origin.Equals(other.Origin) && 
-               Rows.SequenceEqual(other.Rows);
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(ConfigId, Year, Month, Version, Origin);
-    }
 }
