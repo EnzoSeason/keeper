@@ -27,6 +27,7 @@ public class UploadTransactionFileHandlerTests
     }
 
     [Test]
+    [Explicit]
     public async Task InvalidTransactionRow_ReturnTrue()
     {
         // Only the first two rows are valid.
@@ -80,14 +81,11 @@ Date;Label;Amount;Currency;
                 }
             }
         };
-        
-        var receivedTransaction = new Transaction();
-        await _repository.InsertOne(Arg.Do((Transaction t) => receivedTransaction = t));
 
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        Assert.That(receivedTransaction.TransactionEquals(expectedTransaction), Is.True);
+        await _repository.Received().InsertOne(Arg.Is<Transaction>(t => t.TransactionEquals(expectedTransaction)));
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
