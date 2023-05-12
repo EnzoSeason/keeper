@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Http;
-using Moq;
 using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.UploadTransactionFile;
@@ -12,7 +11,7 @@ namespace Reporting.UTest.Commands;
 public class UploadTransactionFileHandlerTests
 {
     private IFormFile _file;
-    private Mock<ITransactionRepository> _repository;
+    private ITransactionRepository _repository;
     private IClock _clock;
     private UploadTransactionFileHandler _handler;
 
@@ -20,13 +19,11 @@ public class UploadTransactionFileHandlerTests
     public void SetUp()
     {
         _file = Substitute.For<IFormFile>();
-        
-        _repository = new Mock<ITransactionRepository>();
-
+        _repository = Substitute.For<ITransactionRepository>();
         _clock = Substitute.For<IClock>();
         _clock.Now.Returns(DateTime.Parse("2023/03/03"));
         
-        _handler = new UploadTransactionFileHandler(_repository.Object, _clock);
+        _handler = new UploadTransactionFileHandler(_repository, _clock);
     }
 
     [Test]
@@ -83,16 +80,11 @@ Date;Label;Amount;Currency;
                 }
             }
         };
-        
-        _repository.Setup(r => r.InsertOne(It.IsAny<Transaction>()))
-            .Returns(Task.FromResult(true));
-        
+
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        _repository.Verify(r => 
-            r.InsertOne(It.Is<Transaction>(t => t.TransactionEquals(expectedTransaction))), 
-            Times.Once);
+        await _repository.Received().InsertOne(Arg.Is<Transaction>(t => t.TransactionEquals(expectedTransaction)));
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
@@ -108,13 +100,10 @@ Date;Label;Amount;Currency;
             File = _file
         };
         
-        _repository.Setup(r => r.InsertOne(It.IsAny<Transaction>()))
-            .Returns(Task.FromResult(true));
-        
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.False);
-        _repository.Verify(r => r.InsertOne(It.IsAny<Transaction>()), Times.Never);
+        await _repository.Received(0).InsertOne(Arg.Any<Transaction>());
     }
 
     [Test]
@@ -127,8 +116,7 @@ Date;Label;Amount;Currency;
         var stream = GetStream(normalRows);
         _file.OpenReadStream().Returns(stream);
 
-        _repository.Setup(r => r.InsertOne(It.IsAny<Transaction>()))
-            .Throws(new Exception());
+        _repository.InsertOne(Arg.Any<Transaction>()).Returns(_ => throw new Exception());
         
         var command = new UploadTransactionFileCommand
         {
