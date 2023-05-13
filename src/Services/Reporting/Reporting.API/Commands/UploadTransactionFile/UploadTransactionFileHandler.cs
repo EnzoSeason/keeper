@@ -39,7 +39,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
 
         // TODO: Replace the hardcoded csv config by the configuration service
         
-        var transactionRows = new List<TransactionRow>();
+        List<TransactionRow> transactionRows;
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Delimiter = ";"
@@ -66,7 +66,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             Month = request.Month,
             Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
             Origin = origin,
-            // Rows = transactionRows
+            Rows = transactionRows
         };
 
         if (!DomainModelValidator<Transaction>.TryValidate(transaction, out var validationResults))

@@ -61,23 +61,23 @@ Date;Label;Amount;Currency;
                 Type = OriginType.File,
                 Description = _file.FileName
             },
-            // Rows = new List<TransactionRow>
-            // {
-            //     new()
-            //     {
-            //         Date = DateTime.Parse("2023-03-29"),
-            //         Label = "FRANPRIX",
-            //         Amount = -6.15M,
-            //         Currency = "EUR"
-            //     },
-            //     new()
-            //     {
-            //         Date = DateTime.Parse("2023-03-29"),
-            //         Label = "PYMT",
-            //         Amount = 16.08M,
-            //         Currency = "EUR"
-            //     }
-            // }
+            Rows = new List<TransactionRow>
+            {
+                new()
+                {
+                    Date = DateTime.Parse("2023-03-29"),
+                    Label = "FRANPRIX",
+                    Amount = -6.15M,
+                    Currency = "EUR"
+                },
+                new()
+                {
+                    Date = DateTime.Parse("2023-03-29"),
+                    Label = "PYMT",
+                    Amount = 16.08M,
+                    Currency = "EUR"
+                }
+            }
         };
         var receivedTransaction = new Transaction();
         await _repository.InsertOne(Arg.Do<Transaction>(t => receivedTransaction = t));
