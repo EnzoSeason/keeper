@@ -80,7 +80,7 @@ Date;Label;Amount;Currency;
             }
         };
         var receivedTransaction = new Transaction();
-        _repository.InsertOne(Arg.Do<Transaction>(t => receivedTransaction = t));
+        await _repository.InsertOne(Arg.Do<Transaction>(t => receivedTransaction = t));
         
         var response = await _handler.Handle(command, CancellationToken.None);
         
