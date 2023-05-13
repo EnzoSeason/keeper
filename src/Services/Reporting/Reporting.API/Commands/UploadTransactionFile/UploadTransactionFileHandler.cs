@@ -66,7 +66,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             Month = request.Month,
             Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
             Origin = origin,
-            Rows = transactionRows
+            // Rows = transactionRows
         };
 
         if (!DomainModelValidator<Transaction>.TryValidate(transaction, out var validationResults))
