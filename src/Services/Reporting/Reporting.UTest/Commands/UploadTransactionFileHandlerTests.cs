@@ -79,10 +79,13 @@ Date;Label;Amount;Currency;
                 }
             }
         };
+        var receivedTransaction = new Transaction();
+        _repository.InsertOne(Arg.Do<Transaction>(t => receivedTransaction = t));
+        
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        await _repository.Received(1).InsertOne(expectedTransaction);
+        Assert.That(receivedTransaction, Is.EqualTo(expectedTransaction));
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
