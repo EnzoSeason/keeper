@@ -4,7 +4,6 @@ using NUnit.Framework;
 using Reporting.API.Commands.UploadTransactionFile;
 using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.UTest.Extensions;
 
 namespace Reporting.UTest.Commands;
 
@@ -80,11 +79,10 @@ Date;Label;Amount;Currency;
                 }
             }
         };
-        
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        await _repository.Received().InsertOne(Arg.Is<Transaction>(t => t.TransactionEquals(expectedTransaction)));
+        await _repository.Received(1).InsertOne(expectedTransaction);
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
