@@ -7,9 +7,7 @@ namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 
 public record Transaction: IAggregateRoot, IValidatableObject
 {
-    [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public ObjectId Id { get; set; }
     
     [BsonRepresentation(BsonType.String)]
     public Guid ConfigId { get; init; }
@@ -19,13 +17,13 @@ public record Transaction: IAggregateRoot, IValidatableObject
     public int Month { get; init; }
 
     /// <summary>
-    /// The creation datetime in millisecond 
+    /// The creation datetime in millisecond
     /// </summary>
     public long Version { get; init; }
     
     public Origin Origin { get; init; } = null!;
 
-    public IEnumerable<TransactionRow> Rows { get; set; } = null!;
+    public IEnumerable<TransactionRow> Rows { get; init; } = null!;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
@@ -80,6 +78,6 @@ public record Transaction: IAggregateRoot, IValidatableObject
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Id, ConfigId, Year, Month, Version, Origin, Rows);
+        return HashCode.Combine(ConfigId, Year, Month, Version, Origin, Rows);
     }
 }

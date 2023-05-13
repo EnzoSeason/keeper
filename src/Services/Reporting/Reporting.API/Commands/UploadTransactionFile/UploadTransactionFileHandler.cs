@@ -36,23 +36,14 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
         {
             return false;
         }
-        
-        var transaction = new Transaction
-        {
-            ConfigId = request.ConfigId,
-            Year = request.Year,
-            Month = request.Month,
-            Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
-            Origin = origin
-        };
-        
+
         // TODO: Replace the hardcoded csv config by the configuration service
         
+        var transactionRows = new List<TransactionRow>();
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Delimiter = ";"
         };
-
         using (var reader = new StreamReader(request.File.OpenReadStream()))
         using (var csv = new CsvReader(reader, csvConfig))
         {
@@ -65,8 +56,18 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
                 .Where(DomainModelValidator<TransactionRow>.TryValidate)
                 .ToList();
         
-            transaction.Rows = rows;
+            transactionRows = rows;
         }
+        
+        var transaction = new Transaction
+        {
+            ConfigId = request.ConfigId,
+            Year = request.Year,
+            Month = request.Month,
+            Version = new DateTimeOffset(_clock.Now).ToUnixTimeMilliseconds(),
+            Origin = origin,
+            Rows = transactionRows
+        };
 
         if (!DomainModelValidator<Transaction>.TryValidate(transaction, out var validationResults))
         {
