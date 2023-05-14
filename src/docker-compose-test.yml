@@ -3,6 +3,7 @@ version: '3.4'
 services:
   nosql-db:
     image: mongodb/mongodb-community-server:6.0-ubi8
+    container_name: nosql-db
     
   reporting-api-unit-test:
     image: ${REGISTRY:-keeper}/reporting-api-unit-test:${PLATFORM:-linux}-${TAG:-latest}
@@ -19,3 +20,9 @@ services:
       target: integrationtest
     depends_on:
       - nosql-db
+
+  nosql-db-cleanup:
+    image: alpine-latest
+    command: sh -c "docker stop nosql-db"
+    depends_on:
+      - reporting-api-integration-test
