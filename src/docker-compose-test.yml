@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  
+  reporting-api-unit-test:
+    image: ${REGISTRY:-keeper}/reporting-api-unit-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Reporting/Reporting.API/Dockerfile
+      target: unittest
