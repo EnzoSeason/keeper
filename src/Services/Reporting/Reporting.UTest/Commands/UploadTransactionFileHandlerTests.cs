@@ -67,14 +67,14 @@ Date;Label;Amount;Currency;
                 {
                     Date = DateTime.Parse("2023-03-29"),
                     Label = "FRANPRIX",
-                    Amount = -6.15M,
+                    Amount = decimal.Parse("-6,15"),
                     Currency = "EUR"
                 },
                 new()
                 {
                     Date = DateTime.Parse("2023-03-29"),
                     Label = "PYMT",
-                    Amount = 16.08M,
+                    Amount = decimal.Parse("16,08"),
                     Currency = "EUR"
                 }
             }
@@ -83,7 +83,7 @@ Date;Label;Amount;Currency;
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        await _repository.Received(1).InsertOne(expectedTransaction);
+        _repository.Received(1).InsertOne(Arg.Is<Transaction>(t => t.Equals(expectedTransaction)));
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
