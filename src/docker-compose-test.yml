@@ -22,7 +22,7 @@ services:
       - nosql-db
 
   nosql-db-cleanup:
-    image: alpine-latest
+    image: alpine
     command: sh -c "docker stop nosql-db"
     depends_on:
       - reporting-api-integration-test
