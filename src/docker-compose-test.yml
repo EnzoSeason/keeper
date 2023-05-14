@@ -1,10 +1,21 @@
 version: '3.4'
 
 services:
-  
+  nosql-db:
+    image: mongodb/mongodb-community-server:6.0-ubi8
+    
   reporting-api-unit-test:
     image: ${REGISTRY:-keeper}/reporting-api-unit-test:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Reporting/Reporting.API/Dockerfile
       target: unittest
+      
+  reporting-api-integration-test:
+    image: ${REGISTRY:-keeper}/reporting-api-integration-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Reporting/Reporting.API/Dockerfile
+      target: integrationtest
+    depends_on:
+      - nosql-db

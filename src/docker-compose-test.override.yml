@@ -1,7 +1,16 @@
 version: '3.4'
 
 services:
-  
+  nosql-db:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=pass
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_test_data:/data/db
+      - mongodb_test_config:/data/configdb
+
   reporting-api-unit-test:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -10,3 +19,18 @@ services:
     entrypoint:
       - dotnet
       - test
+
+  reporting-api-integration-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDb__ConnectionString=mongodb://admin:pass@nosql-db:27017
+      - MongoDb__DatabaseName=KeeperAppTest
+    ports:
+      - "4202:80"
+    entrypoint:
+      - dotnet
+      - test
+
+volumes:
+  mongodb_test_data:
+  mongodb_test_config:
