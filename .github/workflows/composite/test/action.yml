@@ -1,0 +1,15 @@
+name: unit-test
+description: "Run unit test in CI"
+
+inputs:
+  service:
+    description: "the tests service marked in docker compose yaml file"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+  - name: Run unit tests
+    shell: bash
+    working-directory: ./src
+    run: docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up ${{ inputs.service }}

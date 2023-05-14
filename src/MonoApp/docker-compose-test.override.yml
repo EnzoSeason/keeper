@@ -15,7 +15,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
-      - "5103:80"
+      - "5103"
     entrypoint:
       - dotnet
       - test

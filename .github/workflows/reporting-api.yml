@@ -13,11 +13,6 @@ on:
     - src/Services/Reporting/**
     - .github/workflows/reporting-api.yml
 
-env:
-  DOTNET_VERSION: 7.0.x
-  PROJECT_PATH: Services/Reporting/Reporting.API
-  TESTS_PATH: Services/Reporting/Reporting.UTest
-
 jobs:
   unit_test:
     
@@ -26,8 +21,17 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    - uses: ./.github/workflows/composite/unit-test
+    - uses: ./.github/workflows/composite/test
       with:
-        dotnet_version: ${{ env.DOTNET_VERSION }}
-        project_path: ${{ env.PROJECT_PATH }}
-        tests_path: ${{ env.TESTS_PATH }}
+        service: reporting-api-unit-test
+  
+  integration_test:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - uses: ./.github/workflows/composite/test
+      with:
+        service: reporting-api-integration-test
