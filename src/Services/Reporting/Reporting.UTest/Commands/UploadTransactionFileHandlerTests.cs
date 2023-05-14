@@ -74,7 +74,7 @@ Date;Label;Amount;Currency;
                 {
                     Date = DateTime.Parse("2023-03-29"),
                     Label = "PYMT",
-                    Amount = decimal.Parse("16,01"),
+                    Amount = decimal.Parse("16,02"),
                     Currency = "EUR"
                 }
             }
