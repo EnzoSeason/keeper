@@ -67,8 +67,7 @@ public record Transaction: IAggregateRoot, IValidatableObject
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return Id == other.Id && 
-               ConfigId.Equals(other.ConfigId) && 
+        return ConfigId.Equals(other.ConfigId) && 
                Year == other.Year && 
                Month == other.Month && 
                Version == other.Version && 
