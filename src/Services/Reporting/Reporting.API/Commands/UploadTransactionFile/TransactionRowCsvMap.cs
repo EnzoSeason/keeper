@@ -1,3 +1,4 @@
+using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
@@ -26,7 +27,7 @@ public class CustomDecimalConverter : DecimalConverter
 {
     public override object? ConvertFromString(string? text, IReaderRow row, MemberMapData memberMapData)
     {
-        if (decimal.TryParse(text, out var result))
+        if (decimal.TryParse(text, new NumberFormatInfo { NumberDecimalSeparator = ","}, out var result))
         {
             return result;
         }
