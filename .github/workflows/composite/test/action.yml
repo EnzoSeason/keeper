@@ -9,7 +9,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - name: Run unit tests
+  - name: Run tests
     shell: bash
     working-directory: ./src
     run: docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up --build ${{ inputs.service }} --exit-code-from ${{ inputs.service }}
