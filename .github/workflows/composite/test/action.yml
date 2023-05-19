@@ -1,5 +1,5 @@
-name: unit-test
-description: "Run unit test in CI"
+name: tests
+description: "Run tests in CI"
 
 inputs:
   service:
