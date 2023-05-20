@@ -4,6 +4,7 @@ using CsvHelper.Configuration;
 using MediatR;
 using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
+using Reporting.Domain.AggregatesModel.ValueObjects;
 using Reporting.Domain.SeedWork;
 
 namespace Reporting.API.Commands.UploadTransactionFile;
