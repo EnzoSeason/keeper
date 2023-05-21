@@ -84,7 +84,7 @@ Date;Label;Amount;Currency;
         var response = await _handler.Handle(command, CancellationToken.None);
         
         Assert.That(response, Is.True);
-        _repository.Received(1).InsertOne(Arg.Is<Transaction>(t => t.Equals(expectedTransaction)));
+        _repository.Received(1).InsertOne(expectedTransaction);
     }
 
     [TestCaseSource(nameof(GetInvalidTransactionTestCases))]
