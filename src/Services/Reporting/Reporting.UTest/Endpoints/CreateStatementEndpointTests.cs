@@ -5,7 +5,7 @@ using NUnit.Framework;
 using Reporting.API.Commands.CreateStatement;
 using Reporting.API.Controllers;
 
-namespace Reporting.UTest.Controllers;
+namespace Reporting.UTest.Endpoints;
 
 public class CreateStatementEndpointTests
 {
