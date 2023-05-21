@@ -13,11 +13,7 @@ public class TransactionRepository: ITransactionRepository
 
     public TransactionRepository(IOptions<MongoDbSettings> mongoDbSettings)
     {
-        var mongoClient = new MongoClient(
-            mongoDbSettings.Value.ConnectionString);
-        
-        var mongoDatabase = mongoClient.GetDatabase(
-            mongoDbSettings.Value.DatabaseName);
+        var mongoDatabase = MongoDbHelper.GetDatabase(mongoDbSettings);
 
         _transactionCollection =
             mongoDatabase.GetCollection<Transaction>(mongoDbSettings.Value.TransactionCollectionName);
