@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Reporting.API.Commands.CreateStatement;
 using Reporting.API.Commands.UploadTransactionFile;
 
 namespace Reporting.API.Controllers;
@@ -38,6 +39,21 @@ public class ReportsController: ControllerBase
         if (!commandResult)
         {
             return UnprocessableEntity("Upload file command failed.");
+        }
+
+        return NoContent();
+    }
+
+    [HttpPost("aggregate")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> Aggregate(CreateStatementCommand command)
+    {
+        var commandResult = await _mediator.Send(command);
+
+        if (!commandResult)
+        {
+            return UnprocessableEntity("Fail to create the statement from the related transactions");
         }
 
         return NoContent();
