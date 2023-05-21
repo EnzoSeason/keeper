@@ -1,4 +1,5 @@
 using System.Net;
+using MongoDB.Driver;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Xunit;
 
@@ -6,13 +7,17 @@ namespace Reporting.ITest.Scenarios;
 
 public class UploadTransactionFileScenarios : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
+    const string Url = "api/v1/reports/upload";
+    
     private readonly HttpClient _client;
     private readonly MongoDbTestInstance _dbTestInstance;
+    private readonly IMongoCollection<Transaction> _transactionCollection;
 
     public UploadTransactionFileScenarios(CustomWebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
         _dbTestInstance = new MongoDbTestInstance();
+        _transactionCollection = _dbTestInstance.GetCollection<Transaction>();
     }
 
     public void Dispose()
@@ -21,26 +26,27 @@ public class UploadTransactionFileScenarios : IClassFixture<CustomWebApplication
     }
 
     [Fact]
-    public async Task Post_UploadTransactionFile_Success()
+    public async Task Post_Success()
     {
-        const string url = "api/v1/reports/upload";
         var formData = GetRequest();
 
-        var response = await _client.PostAsync(url, formData);
+        var response = await _client.PostAsync(Url, formData);
 
         response.EnsureSuccessStatusCode();
+        var query = await _transactionCollection.FindAsync(_ => true);
+        var result = await query.ToListAsync();
+        Assert.True(result.Count > 0);
     }
 
     [Fact]
-    public async Task Post_UploadTransactionFile_FileAlreadyExists_Failed()
+    public async Task Post_FileAlreadyExists_Failed()
     {
-        const string url = "api/v1/reports/upload";
         var formData = GetRequest();
         
         // Send the same request twice
         // Simulate the case that the transaction exists in the database
-        await _client.PostAsync(url, formData);
-        var response = await _client.PostAsync(url, formData);
+        await _client.PostAsync(Url, formData);
+        var response = await _client.PostAsync(Url, formData);
         
         Assert.True(response.StatusCode == HttpStatusCode.UnprocessableEntity);
     }

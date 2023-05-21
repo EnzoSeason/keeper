@@ -11,4 +11,6 @@ public record MongoDbTestInstance
 
     public static readonly string DatabaseName =
         Environment.GetEnvironmentVariable("MongoDb__DatabaseName") ?? "KeeperReportingTest";
+    
+    public IMongoCollection<T> GetCollection<T>() => Client.GetDatabase(DatabaseName).GetCollection<T>(typeof(T).Name);
 }
