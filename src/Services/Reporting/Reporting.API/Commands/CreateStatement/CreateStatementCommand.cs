@@ -11,6 +11,7 @@ public class CreateStatementCommand: IRequest<bool>
     /// <summary>
     /// The ID of the configuration used for creating the report
     /// </summary>
+    [DefaultValue("3de74b1c-36db-4b19-9694-e6a213252982")]
     public Guid ConfigId { get; init; }
     
     /// <summary>
