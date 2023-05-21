@@ -8,11 +8,11 @@ public record TransactionRow: IValidatableObject
     [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
     public DateTime Date { get; init; }
     
-    public string Label { get; init; }
-    
+    public string Label { get; init; } = null!;
+
     public decimal Amount { get; init; }
 
-    public string Currency { get; init; }
+    public string Currency { get; init; } = null!;
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
