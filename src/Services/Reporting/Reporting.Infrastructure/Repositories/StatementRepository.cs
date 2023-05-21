@@ -44,19 +44,10 @@ public class StatementRepository : IStatementRepository
             Builders<Transaction>.Filter.Eq(t => t.Year, year),
             Builders<Transaction>.Filter.Eq(t => t.Month, month));
         
-        var results = await _transactionCollection.FindAsync(transactionsFilter);
-        
-        var transactions = await results.ToListAsync();
-        var transactionRows = transactions.SelectMany(t => t.Rows);
+        var query = await _transactionCollection.FindAsync(transactionsFilter);
+        var transactions = await query.ToListAsync();
 
-        var statement = new Statement
-        {
-            ConfigId = configId,
-            Year = year,
-            Month = month,
-            Rows = transactionRows
-        };
-
+        var statement = Statement.Build(configId, year, month, transactions);
         await _statementCollection.InsertOneAsync(statement);
     }
 }
