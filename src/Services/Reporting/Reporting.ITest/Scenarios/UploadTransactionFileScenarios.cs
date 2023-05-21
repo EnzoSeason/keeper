@@ -2,14 +2,14 @@ using System.Net;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Xunit;
 
-namespace Reporting.ITest.Controllers;
+namespace Reporting.ITest.Scenarios;
 
-public class ReportingScenarios : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
+public class UploadTransactionFileScenarios : IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     private readonly HttpClient _client;
     private readonly MongoDbTestInstance _dbTestInstance;
 
-    public ReportingScenarios(CustomWebApplicationFactory<Program> factory)
+    public UploadTransactionFileScenarios(CustomWebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
         _dbTestInstance = new MongoDbTestInstance();
