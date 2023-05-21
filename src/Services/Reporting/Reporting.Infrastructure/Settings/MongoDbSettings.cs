@@ -10,6 +10,8 @@ public class MongoDbSettings
     public string DatabaseName { get; set; } = null!;
 
     public string TransactionCollectionName { get; set; } = null!;
+
+    public string StatementCollectionName { get; set; } = null!;
 }
 
 public static class MongoDbHelper
