@@ -2,7 +2,7 @@ using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
 using CsvHelper.TypeConversion;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.ValueObjects;
 
 namespace Reporting.API.Commands.UploadTransactionFile;
 

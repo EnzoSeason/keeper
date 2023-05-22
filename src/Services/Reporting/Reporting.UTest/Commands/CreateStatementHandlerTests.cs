@@ -1,7 +1,7 @@
 using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.CreateStatement;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
+using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.UTest.Commands;
 

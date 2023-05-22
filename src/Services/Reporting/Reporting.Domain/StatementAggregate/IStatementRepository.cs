@@ -1,6 +1,6 @@
 using Domain.SeedWork;
 
-namespace Reporting.Domain.AggregatesModel.StatementAggregate;
+namespace Reporting.Domain.StatementAggregate;
 
 public interface IStatementRepository: IRepository<Statement>
 {

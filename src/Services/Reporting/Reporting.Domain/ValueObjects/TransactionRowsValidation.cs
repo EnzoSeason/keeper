@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Reporting.Domain.AggregatesModel.ValueObjects;
+namespace Reporting.Domain.ValueObjects;
 
 public static class TransactionRowsValidation
 {

@@ -1,7 +1,7 @@
 using NUnit.Framework;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.StatementAggregate;
+using Reporting.Domain.TransactionAggregate;
+using Reporting.Domain.ValueObjects;
 
 namespace Reporting.UTest.Domains;
 

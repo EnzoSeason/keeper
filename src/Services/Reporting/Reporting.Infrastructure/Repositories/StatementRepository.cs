@@ -1,9 +1,8 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.StatementAggregate;
+using Reporting.Domain.TransactionAggregate;
 using Reporting.Infrastructure.Settings;
 
 namespace Reporting.Infrastructure.Repositories;

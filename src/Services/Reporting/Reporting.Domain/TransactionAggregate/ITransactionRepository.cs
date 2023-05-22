@@ -1,6 +1,6 @@
 using Domain.SeedWork;
 
-namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
+namespace Reporting.Domain.TransactionAggregate;
 
 public interface ITransactionRepository: IRepository<Transaction>
 {

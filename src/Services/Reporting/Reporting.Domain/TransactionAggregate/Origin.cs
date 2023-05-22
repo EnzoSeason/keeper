@@ -1,7 +1,4 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
+namespace Reporting.Domain.TransactionAggregate;
 
 public record Origin
 {

@@ -1,6 +1,6 @@
 using System.Net;
 using MongoDB.Driver;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
+using Reporting.Domain.TransactionAggregate;
 using Xunit;
 
 namespace Reporting.ITest.Scenarios;

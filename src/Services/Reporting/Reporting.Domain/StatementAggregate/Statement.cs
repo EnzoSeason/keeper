@@ -2,10 +2,10 @@ using System.ComponentModel.DataAnnotations;
 using Domain.SeedWork;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.ValueObjects;
+using Reporting.Domain.TransactionAggregate;
 
-namespace Reporting.Domain.AggregatesModel.StatementAggregate;
+namespace Reporting.Domain.StatementAggregate;
 
 public record Statement: IValidatableObject, IAggregateRoot
 {

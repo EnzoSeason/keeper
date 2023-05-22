@@ -3,8 +3,8 @@ using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.UploadTransactionFile;
 using Reporting.API.Utils;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.TransactionAggregate;
+using Reporting.Domain.ValueObjects;
 
 namespace Reporting.UTest.Commands;
 

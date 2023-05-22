@@ -2,9 +2,9 @@ using System.Net;
 using System.Text;
 using MongoDB.Driver;
 using Newtonsoft.Json;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.StatementAggregate;
+using Reporting.Domain.TransactionAggregate;
+using Reporting.Domain.ValueObjects;
 using Xunit;
 
 namespace Reporting.ITest.Scenarios;

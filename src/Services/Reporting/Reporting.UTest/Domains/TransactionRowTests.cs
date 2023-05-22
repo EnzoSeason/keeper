@@ -1,6 +1,6 @@
 using Domain.SeedWork;
 using NUnit.Framework;
-using Reporting.Domain.AggregatesModel.ValueObjects;
+using Reporting.Domain.ValueObjects;
 
 namespace Reporting.UTest.Domains;
 

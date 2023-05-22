@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Reporting.Domain.AggregatesModel.ValueObjects;
+namespace Reporting.Domain.ValueObjects;
 
 public record TransactionRow: IValidatableObject
 {

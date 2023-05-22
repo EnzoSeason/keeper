@@ -1,5 +1,5 @@
 using MediatR;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
+using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.API.Commands.CreateStatement;
 

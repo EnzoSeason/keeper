@@ -1,8 +1,8 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Reporting.API.Utils;
-using Reporting.Domain.AggregatesModel.StatementAggregate;
-using Reporting.Domain.AggregatesModel.TransactionAggregate;
+using Reporting.Domain.StatementAggregate;
+using Reporting.Domain.TransactionAggregate;
 using Reporting.Infrastructure.Repositories;
 using Reporting.Infrastructure.Settings;
 
