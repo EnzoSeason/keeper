@@ -1,4 +1,4 @@
-using Reporting.Domain.SeedWork;
+using Domain.SeedWork;
 
 namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 

@@ -1,13 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.SeedWork;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.AggregatesModel.ValueObjects;
-using Reporting.Domain.SeedWork;
 
 namespace Reporting.Domain.AggregatesModel.StatementAggregate;
 
-public record Statement: IAggregateRoot, IValidatableObject
+public record Statement: IValidatableObject, IAggregateRoot
 {
     public ObjectId Id { get; set; }
     

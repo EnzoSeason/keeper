@@ -1,11 +1,11 @@
 using System.Globalization;
 using CsvHelper;
 using CsvHelper.Configuration;
+using Domain.SeedWork;
 using MediatR;
 using Reporting.API.Utils;
 using Reporting.Domain.AggregatesModel.TransactionAggregate;
 using Reporting.Domain.AggregatesModel.ValueObjects;
-using Reporting.Domain.SeedWork;
 
 namespace Reporting.API.Commands.UploadTransactionFile;
 

@@ -23,6 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\SeedWorks\Domain.SeedWork\Domain.SeedWork.csproj" />
       <ProjectReference Include="..\Reporting.Domain\Reporting.Domain.csproj" />
       <ProjectReference Include="..\Reporting.Infrastructure\Reporting.Infrastructure.csproj" />
     </ItemGroup>

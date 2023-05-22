@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Reporting.Domain.SeedWork;
+namespace Domain.SeedWork;
 
 public static class DomainModelValidator<T> where T : IValidatableObject
 {

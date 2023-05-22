@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using Domain.SeedWork;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using Reporting.Domain.AggregatesModel.ValueObjects;
-using Reporting.Domain.SeedWork;
 
 namespace Reporting.Domain.AggregatesModel.TransactionAggregate;
 

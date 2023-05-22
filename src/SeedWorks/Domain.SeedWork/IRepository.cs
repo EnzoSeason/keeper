@@ -1,3 +1,3 @@
-namespace Reporting.Domain.SeedWork;
+namespace Domain.SeedWork;
 
 public interface IRepository<T> where T : IAggregateRoot { }

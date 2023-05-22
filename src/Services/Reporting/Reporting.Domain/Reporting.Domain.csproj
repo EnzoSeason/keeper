@@ -11,4 +11,8 @@
       <PackageReference Include="MongoDB.Bson" Version="2.19.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\SeedWorks\Domain.SeedWork\Domain.SeedWork.csproj" />
+    </ItemGroup>
+
 </Project>
