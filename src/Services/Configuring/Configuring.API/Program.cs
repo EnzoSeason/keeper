@@ -1,4 +1,7 @@
 using System.Reflection;
+using Configuring.Domain.SourceAggregation;
+using Configuring.Infrastructure.Repositories;
+using Configuring.Infrastructure.Settings;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,12 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
         $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 });
+
+// Custom Services
+builder.Services.AddSingleton<ISourceRepository, SourceRepository>();
+
+// Custom Configurations
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));
 
 var app = builder.Build();
 

@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuring.Domain", "Servi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuring.API", "Services\Configuring\Configuring.API\Configuring.API.csproj", "{9EC9186C-6291-482C-8C41-7E6E1F3A599B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuring.Infrastructure", "Services\Configuring\Configuring.Infrastructure\Configuring.Infrastructure.csproj", "{FA7DF584-29A2-49CA-95A7-E75687DD29FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuring.UTest", "Services\Configuring\Configuring.UTest\Configuring.UTest.csproj", "{603AE4A6-EF1D-46D3-90B8-E8E345B3A6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{9EC9186C-6291-482C-8C41-7E6E1F3A599B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EC9186C-6291-482C-8C41-7E6E1F3A599B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EC9186C-6291-482C-8C41-7E6E1F3A599B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA7DF584-29A2-49CA-95A7-E75687DD29FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA7DF584-29A2-49CA-95A7-E75687DD29FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA7DF584-29A2-49CA-95A7-E75687DD29FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA7DF584-29A2-49CA-95A7-E75687DD29FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{603AE4A6-EF1D-46D3-90B8-E8E345B3A6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{603AE4A6-EF1D-46D3-90B8-E8E345B3A6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{603AE4A6-EF1D-46D3-90B8-E8E345B3A6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{603AE4A6-EF1D-46D3-90B8-E8E345B3A6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -3,6 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
@@ -20,6 +21,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Configuring.Domain\Configuring.Domain.csproj" />
+      <ProjectReference Include="..\Configuring.Infrastructure\Configuring.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
