@@ -35,6 +35,8 @@ public class MappingController: ControllerBase
     }
 
     [HttpGet("{configId:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<Source>> Get(Guid configId)
     {
         var source = await _sourceRepository.Get(configId);
@@ -45,5 +47,20 @@ public class MappingController: ControllerBase
         }
 
         return source;
+    }
+
+    [HttpPut("{configId:guid}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Update(Guid configId, Source source)
+    {
+        if (!await _sourceRepository.IsFound(configId))
+        {
+            return NotFound("The Mapping Configuring doesn't exist.");
+        }
+
+        await _sourceRepository.ReplaceOne(configId, source);
+
+        return NoContent();
     }
 }

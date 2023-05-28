@@ -68,4 +68,25 @@ public class MappingControllerTests
         Assert.That(response, Is.InstanceOf<ActionResult<Source>>());
         Assert.That(response.Result, Is.InstanceOf<NotFoundResult>());
     }
+
+    [Test]
+    public async Task UpdateOne_Success()
+    {
+        var configId = Guid.Parse(ConfigIdStr);
+        _sourceRepository.IsFound(configId).Returns(Task.FromResult(true));
+
+        var response = await _controller.Update(configId, new Source());
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<NoContentResult>());
+    }
+
+    [Test]
+    public async Task UpdateOne_NotFound_Fail()
+    {
+        var response = await _controller.Update(Guid.NewGuid(), new Source());
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<NotFoundObjectResult>());
+    }
 }

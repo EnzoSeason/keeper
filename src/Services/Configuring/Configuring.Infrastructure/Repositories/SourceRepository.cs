@@ -18,4 +18,9 @@ public class SourceRepository : ISourceRepository
     {
         throw new NotImplementedException();
     }
+
+    public Task ReplaceOne(Guid configId, Source source)
+    {
+        throw new NotImplementedException();
+    }
 }
