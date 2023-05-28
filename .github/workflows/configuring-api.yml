@@ -1,0 +1,26 @@
+name: configuring-api
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+    - src/Services/Configuring/**
+    - .github/workflows/configuring-api.yml
+  
+  pull_request:
+    branches: [ "main" ]
+    paths:
+    - src/Services/Configuring/**
+    - .github/workflows/configuring-api.yml
+
+jobs:
+  unit_test:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - uses: ./.github/workflows/composite/test
+      with:
+        service: configuring-api-unit-test
