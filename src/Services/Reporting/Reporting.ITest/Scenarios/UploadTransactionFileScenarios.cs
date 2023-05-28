@@ -1,4 +1,5 @@
 using System.Net;
+using ITest.SeedWork;
 using MongoDB.Driver;
 using Reporting.Domain.TransactionAggregate;
 using Xunit;

@@ -2,7 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net7.0</TargetFramework>
-        <LangVersion>11</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
 
@@ -25,8 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\SeedWorks\ITest.SeedWork\ITest.SeedWork.csproj" />
-      <ProjectReference Include="..\Reporting.API\Reporting.API.csproj" />
+      <ProjectReference Include="..\Configuring.Infrastructure\Configuring.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

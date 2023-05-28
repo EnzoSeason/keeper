@@ -1,6 +1,6 @@
 using MongoDB.Driver;
 
-namespace Reporting.ITest;
+namespace ITest.SeedWork;
 
 public record MongoDbTestInstance
 {
