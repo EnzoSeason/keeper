@@ -33,4 +33,17 @@ public class MappingController: ControllerBase
         
         return CreatedAtAction(nameof(Create), new { configId = newSource.ConfigId }, newSource);
     }
+
+    [HttpGet("{configId:guid}")]
+    public async Task<ActionResult<Source>> Get(Guid configId)
+    {
+        var source = await _sourceRepository.Get(configId);
+
+        if (source is null)
+        {
+            return NotFound();
+        }
+
+        return source;
+    }
 }

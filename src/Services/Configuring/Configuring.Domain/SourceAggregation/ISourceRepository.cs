@@ -4,7 +4,9 @@ namespace Configuring.Domain.SourceAggregation;
 
 public interface ISourceRepository : IRepository<Source>
 {
-    Task InsertOne(Source source);
-    
     Task<bool> IsFound(Guid configId);
+    
+    Task InsertOne(Source source);
+
+    Task<Source?> Get(Guid configId);
 }

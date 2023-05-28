@@ -4,12 +4,17 @@ namespace Configuring.Infrastructure.Repositories;
 
 public class SourceRepository : ISourceRepository
 {
+    public Task<bool> IsFound(Guid configId)
+    {
+        throw new NotImplementedException();
+    }
+    
     public Task InsertOne(Source source)
     {
         throw new NotImplementedException();
     }
 
-    public Task<bool> IsFound(Guid configId)
+    public Task<Source?> Get(Guid configId)
     {
         throw new NotImplementedException();
     }

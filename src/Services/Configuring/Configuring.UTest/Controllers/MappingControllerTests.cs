@@ -8,6 +8,8 @@ namespace Configuring.UTest.Controllers;
 
 public class MappingControllerTests
 {
+    private const string ConfigIdStr = "3de74b1c-36db-4b19-9694-e6a213252982";
+    
     private ISourceRepository _sourceRepository;
     private MappingController _controller;
 
@@ -39,5 +41,31 @@ public class MappingControllerTests
         
         Assert.That(response, Is.Not.Null);
         Assert.That(response, Is.InstanceOf<BadRequestObjectResult>());
+    }
+
+    [Test]
+    public async Task GetOne_Success()
+    {
+        var expectedConfigId = Guid.Parse(ConfigIdStr);
+        _sourceRepository.Get(expectedConfigId).Returns(Task.FromResult(new Source { ConfigId = expectedConfigId }));
+
+        var response = await _controller.Get(expectedConfigId);
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<ActionResult<Source>>());
+        Assert.That(response.Value, Is.Not.Null);
+        Assert.That(response.Value!.ConfigId, Is.EqualTo(expectedConfigId));
+    }
+
+    [Test]
+    public async Task GetOne_NotFound_Fail()
+    {
+        _sourceRepository.Get(Arg.Any<Guid>()).Returns(Task.FromResult<Source>(null!));
+
+        var response = await _controller.Get(Guid.NewGuid());
+        
+        Assert.That(response, Is.Not.Null);
+        Assert.That(response, Is.InstanceOf<ActionResult<Source>>());
+        Assert.That(response.Result, Is.InstanceOf<NotFoundResult>());
     }
 }
