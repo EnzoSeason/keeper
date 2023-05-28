@@ -1,11 +1,14 @@
+using Configuring.Infrastructure.Settings;
+using ITest.SeedWork;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ITest.SeedWork;
+namespace Configuring.ITest;
 
 public class CustomWebApplicationFactory<TProgram>
-    : WebApplicationFactory<TProgram> where TProgram : class
+    : WebApplicationFactory<TProgram> 
+    where TProgram : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
