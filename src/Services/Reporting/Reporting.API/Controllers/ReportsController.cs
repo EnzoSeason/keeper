@@ -5,6 +5,9 @@ using Reporting.API.Commands.UploadTransactionFile;
 
 namespace Reporting.API.Controllers;
 
+/// <summary>
+/// Controlling the financial reports 
+/// </summary>
 [ApiController]
 [Route("api/v1/[controller]")]
 public class ReportsController: ControllerBase
@@ -16,6 +19,9 @@ public class ReportsController: ControllerBase
         _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
     }
 
+    /// <summary>
+    /// Upload a CSV file that contains transaction rows
+    /// </summary>
     [HttpPost("upload")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,6 +50,9 @@ public class ReportsController: ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Command to aggregate the transactions into a statement
+    /// </summary>
     [HttpPost("aggregate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
