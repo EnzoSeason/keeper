@@ -51,6 +51,10 @@ Run the project locally. Please lanuch **MongoDB** on your local machine.
 
 ## ITest
 
+To run the integration tests locally, we need to, first, move to the `service` repo.
+
+### Reporting
+
 ```code
-docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up
+docker compose -f docker-compose-test.yml -f docker-compose-test.override.yml up --build reporting-api-integration-test --exit-code-from reporting-api-integration-test
 ```
