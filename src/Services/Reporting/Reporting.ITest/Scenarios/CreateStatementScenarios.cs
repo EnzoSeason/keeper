@@ -86,7 +86,7 @@ public class CreateStatementScenarios: IClassFixture<CustomWebApplicationFactory
         _transactionCollection.InsertMany(new[] { transaction1, transaction2 });
     }
 
-    private string GetRequestBody()
+    private static string GetRequestBody()
     {
         var command = new
         {
