@@ -19,9 +19,7 @@ There are 2 services:
 
   - Read a config
 
-  - Update a config: Only the reporting configuration can be updated. Username and UID is immutable.
-
-  - Delete a config: delete all the transactions and reports linked to it, too.
+  - Update a config: Only the reporting configuration can be updated. UID is immutable.
 
 - Reporting Service:
 
