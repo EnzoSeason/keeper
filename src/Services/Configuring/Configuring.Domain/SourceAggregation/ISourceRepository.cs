@@ -10,5 +10,5 @@ public interface ISourceRepository : IRepository<Source>
 
     Task<Source?> Get(Guid configId);
 
-    Task ReplaceOne(Guid configId, Source source);
+    Task<bool> ReplaceOne(Guid configId, Source source);
 }

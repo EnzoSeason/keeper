@@ -52,15 +52,6 @@ public class MappingController: ControllerBase
     [HttpPut("{configId:guid}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update(Guid configId, Source source)
-    {
-        if (!await _sourceRepository.IsFound(configId))
-        {
-            return NotFound("The Mapping Configuring doesn't exist.");
-        }
-
-        await _sourceRepository.ReplaceOne(configId, source);
-
-        return NoContent();
-    }
+    public async Task<IActionResult> Update(Guid configId, Source source) =>
+        await _sourceRepository.ReplaceOne(configId, source) ? NoContent() : NotFound();
 }

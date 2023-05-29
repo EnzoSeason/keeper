@@ -1,26 +1,47 @@
 using Configuring.Domain.SourceAggregation;
+using Configuring.Infrastructure.Settings;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Configuring.Infrastructure.Repositories;
 
 public class SourceRepository : ISourceRepository
 {
-    public Task<bool> IsFound(Guid configId)
+    private readonly IMongoCollection<Source> _sourceCollection;
+
+    public SourceRepository(IOptions<MongoDbSettings> mongoDbSettings)
     {
-        throw new NotImplementedException();
-    }
-    
-    public Task InsertOne(Source source)
-    {
-        throw new NotImplementedException();
+        var mongoDatabase = MongoDbHelper.GetDatabase(mongoDbSettings);
+
+        _sourceCollection = mongoDatabase.GetCollection<Source>(mongoDbSettings.Value.SourceCollectionName);
     }
 
-    public Task<Source?> Get(Guid configId)
+    public async Task<bool> IsFound(Guid configId)
     {
-        throw new NotImplementedException();
+        var filter = Builders<Source>.Filter.Eq(s => s.ConfigId, configId);
+        
+        var result = await _sourceCollection.FindAsync(filter);
+
+        return await result.AnyAsync();
     }
 
-    public Task ReplaceOne(Guid configId, Source source)
+    public async Task InsertOne(Source source) => await _sourceCollection.InsertOneAsync(source);
+
+    public async Task<Source?> Get(Guid configId) =>
+        await _sourceCollection.Find(s => s.ConfigId == configId).FirstOrDefaultAsync();
+
+    public async Task<bool> ReplaceOne(Guid configId, Source source)
     {
-        throw new NotImplementedException();
+        var filter = Builders<Source>.Filter.Eq(s => s.ConfigId, configId);
+        var oldSource = await _sourceCollection.Find(filter).FirstOrDefaultAsync();
+
+        if (oldSource is null)
+        {
+            return false;
+        }
+        
+        source.Id = oldSource.Id;
+        await _sourceCollection.ReplaceOneAsync(filter, source);
+        return true;
     }
 }

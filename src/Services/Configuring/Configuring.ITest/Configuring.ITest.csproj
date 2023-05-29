@@ -24,7 +24,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Configuring.Infrastructure\Configuring.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\..\SeedWorks\ITest.SeedWork\ITest.SeedWork.csproj" />
+      <ProjectReference Include="..\Configuring.API\Configuring.API.csproj" />
     </ItemGroup>
 
 </Project>
