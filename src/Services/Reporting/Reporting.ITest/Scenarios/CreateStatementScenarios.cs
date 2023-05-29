@@ -45,9 +45,9 @@ public class CreateStatementScenarios: IClassFixture<CustomWebApplicationFactory
         var response = await _client.PostAsync(Url, request);
 
         response.EnsureSuccessStatusCode();
-        var result = await _statementCollection.FindAsync(_ => true);
-        var resultList = await result.ToListAsync();
-        Assert.True(resultList.Count == 1);
+        var result = await _statementCollection
+            .Find(s => s.ConfigId == Guid.Parse(ConfigIdStr)).FirstOrDefaultAsync();
+        Assert.True(result is not null);
     }
     
     [Fact]
