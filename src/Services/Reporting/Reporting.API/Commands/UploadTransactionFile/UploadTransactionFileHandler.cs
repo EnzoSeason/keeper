@@ -38,7 +38,7 @@ public class UploadTransactionFileHandler : IRequestHandler<UploadTransactionFil
             return false;
         }
 
-        // TODO: Replace the hardcoded csv config by the configuration service
+        // TODO: Replace the hardcoded csv config by the configuring service
         
         List<TransactionRow> transactionRows;
         var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture)
