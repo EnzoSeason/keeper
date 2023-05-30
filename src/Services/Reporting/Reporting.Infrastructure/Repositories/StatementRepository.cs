@@ -36,7 +36,7 @@ public class StatementRepository : IStatementRepository
         return await result.AnyAsync();
     }
 
-    public async Task AggregateTransactions(Guid configId, int year, int month)
+    public async Task<Statement> AggregateTransactions(Guid configId, int year, int month)
     {
         var transactionsFilter = Builders<Transaction>.Filter.And(
             Builders<Transaction>.Filter.Eq(t => t.ConfigId, configId), 
@@ -48,5 +48,6 @@ public class StatementRepository : IStatementRepository
 
         var statement = Statement.Build(configId, year, month, transactions);
         await _statementCollection.InsertOneAsync(statement);
+        return statement;
     }
 }
