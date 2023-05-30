@@ -2,12 +2,12 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NUnit.Framework;
-using Reporting.API.Commands.CreateStatement;
+using Reporting.API.Commands.AggregateTransactions;
 using Reporting.API.Controllers;
 
 namespace Reporting.UTest.Endpoints;
 
-public class CreateStatementEndpointTests
+public class AggregateTransactionsEndpointTests
 {
     private IMediator _mediator;
     private ReportsController _controller;
@@ -22,7 +22,7 @@ public class CreateStatementEndpointTests
     [Test]
     public async Task NoContent_Success()
     {
-        var command = new CreateStatementCommand
+        var command = new AggregateTransactionsCommand
         {
             ConfigId = Guid.NewGuid(),
             Year = 2023,
@@ -39,7 +39,7 @@ public class CreateStatementEndpointTests
     [Test]
     public async Task UnprocessableEntity_UploadCommandFailed()
     {
-        var command = new CreateStatementCommand
+        var command = new AggregateTransactionsCommand
         {
             ConfigId = Guid.NewGuid(),
             Year = 2023,

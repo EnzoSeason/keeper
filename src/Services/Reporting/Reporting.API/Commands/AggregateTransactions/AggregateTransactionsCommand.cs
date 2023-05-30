@@ -1,12 +1,12 @@
 using System.ComponentModel;
 using MediatR;
 
-namespace Reporting.API.Commands.CreateStatement;
+namespace Reporting.API.Commands.AggregateTransactions;
 
 /// <summary>
 /// Create a statement by aggregating the transactions
 /// </summary>
-public class CreateStatementCommand: IRequest<bool>
+public class AggregateTransactionsCommand: IRequest<bool>
 {
     /// <summary>
     /// The ID of the configuration used for creating the report

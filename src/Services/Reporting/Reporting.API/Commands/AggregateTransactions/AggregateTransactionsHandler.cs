@@ -1,18 +1,18 @@
 using MediatR;
 using Reporting.Domain.StatementAggregate;
 
-namespace Reporting.API.Commands.CreateStatement;
+namespace Reporting.API.Commands.AggregateTransactions;
 
-public class CreateStatementHandler : IRequestHandler<CreateStatementCommand, bool>
+public class AggregateTransactionsHandler : IRequestHandler<AggregateTransactionsCommand, bool>
 {
     private readonly IStatementRepository _repository;
 
-    public CreateStatementHandler(IStatementRepository repository)
+    public AggregateTransactionsHandler(IStatementRepository repository)
     {
         _repository = repository;
     }
 
-    public async Task<bool> Handle(CreateStatementCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(AggregateTransactionsCommand request, CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
         {

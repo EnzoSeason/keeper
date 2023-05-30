@@ -1,20 +1,20 @@
 using NSubstitute;
 using NUnit.Framework;
-using Reporting.API.Commands.CreateStatement;
+using Reporting.API.Commands.AggregateTransactions;
 using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.UTest.Commands;
 
-public class CreateStatementHandlerTests
+public class AggregateTransactionsHandlerTests
 {
     private IStatementRepository _repository;
-    private CreateStatementHandler _handler;
+    private AggregateTransactionsHandler _handler;
 
     [SetUp]
     public void SetUp()
     {
         _repository = Substitute.For<IStatementRepository>();
-        _handler = new CreateStatementHandler(_repository);
+        _handler = new AggregateTransactionsHandler(_repository);
     }
     
     [Test]
@@ -23,7 +23,7 @@ public class CreateStatementHandlerTests
         var cts = new CancellationTokenSource();
         cts.Cancel();
         
-        var response = await _handler.Handle(new CreateStatementCommand(), cts.Token);
+        var response = await _handler.Handle(new AggregateTransactionsCommand(), cts.Token);
         Assert.That(response, Is.False);
     }
     
@@ -34,7 +34,7 @@ public class CreateStatementHandlerTests
         var year = 2023;
         var month = 3;
 
-        var command = new CreateStatementCommand
+        var command = new AggregateTransactionsCommand
         {
             ConfigId = configId,
             Year = year,
@@ -55,7 +55,7 @@ public class CreateStatementHandlerTests
         var year = 2023;
         var month = 3;
 
-        var command = new CreateStatementCommand
+        var command = new AggregateTransactionsCommand
         {
             ConfigId = configId,
             Year = year,

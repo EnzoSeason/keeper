@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Reporting.ITest.Scenarios;
 
-public class CreateStatementScenarios: IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
+public class AggregateTransactionsScenarios: IClassFixture<CustomWebApplicationFactory<Program>>, IDisposable
 {
     const string Url = "api/v1/reports/aggregate";
     private const string ConfigIdStr = "3de74b1c-36db-4b19-9694-e6a213252982";
@@ -22,7 +22,7 @@ public class CreateStatementScenarios: IClassFixture<CustomWebApplicationFactory
     private readonly IMongoCollection<Statement> _statementCollection;
     private readonly IMongoCollection<Transaction> _transactionCollection;
 
-    public CreateStatementScenarios(CustomWebApplicationFactory<Program> factory)
+    public AggregateTransactionsScenarios(CustomWebApplicationFactory<Program> factory)
     {
         _client = factory.CreateClient();
         _dbTestInstance = new MongoDbTestInstance();

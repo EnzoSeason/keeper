@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Reporting.API.Commands.CreateStatement;
+using Reporting.API.Commands.AggregateTransactions;
 using Reporting.API.Commands.UploadTransactionFile;
 
 namespace Reporting.API.Controllers;
@@ -51,12 +51,12 @@ public class ReportsController: ControllerBase
     }
 
     /// <summary>
-    /// Command to aggregate the transactions into a statement
+    /// Command to aggregate the transactions into a statement, then build a report
     /// </summary>
     [HttpPost("aggregate")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Aggregate(CreateStatementCommand command)
+    public async Task<IActionResult> Aggregate(AggregateTransactionsCommand command)
     {
         var commandResult = await _mediator.Send(command);
 
