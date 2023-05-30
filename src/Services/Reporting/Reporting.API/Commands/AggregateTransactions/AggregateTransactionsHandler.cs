@@ -1,15 +1,18 @@
 using MediatR;
+using Reporting.Domain.ReportAggregate;
 using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.API.Commands.AggregateTransactions;
 
 public class AggregateTransactionsHandler : IRequestHandler<AggregateTransactionsCommand, bool>
 {
-    private readonly IStatementRepository _repository;
+    private readonly IStatementRepository _statementRepository;
+    private readonly IReportRepository _reportRepository;
 
-    public AggregateTransactionsHandler(IStatementRepository repository)
+    public AggregateTransactionsHandler(IStatementRepository statementRepository, IReportRepository reportRepository)
     {
-        _repository = repository;
+        _statementRepository = statementRepository;
+        _reportRepository = reportRepository;
     }
 
     public async Task<bool> Handle(AggregateTransactionsCommand request, CancellationToken cancellationToken)
@@ -19,14 +22,16 @@ public class AggregateTransactionsHandler : IRequestHandler<AggregateTransaction
             return false;
         }
         
-        if (await _repository.IsFound(request.ConfigId, request.Year, request.Month))
+        if (await _statementRepository.IsFound(request.ConfigId, request.Year, request.Month))
         {
             return false;
         }
 
         try
         {
-            await _repository.AggregateTransactions(request.ConfigId, request.Year, request.Month);
+            var statement =
+                await _statementRepository.AggregateTransactions(request.ConfigId, request.Year, request.Month);
+            await _reportRepository.Analyze(statement);
         }
         catch
         {

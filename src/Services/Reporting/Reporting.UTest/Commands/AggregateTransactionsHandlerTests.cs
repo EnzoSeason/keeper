@@ -1,20 +1,23 @@
 using NSubstitute;
 using NUnit.Framework;
 using Reporting.API.Commands.AggregateTransactions;
+using Reporting.Domain.ReportAggregate;
 using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.UTest.Commands;
 
 public class AggregateTransactionsHandlerTests
 {
-    private IStatementRepository _repository;
+    private IStatementRepository _statementRepository;
+    private IReportRepository _reportRepository;
     private AggregateTransactionsHandler _handler;
 
     [SetUp]
     public void SetUp()
     {
-        _repository = Substitute.For<IStatementRepository>();
-        _handler = new AggregateTransactionsHandler(_repository);
+        _statementRepository = Substitute.For<IStatementRepository>();
+        _reportRepository = Substitute.For<IReportRepository>();
+        _handler = new AggregateTransactionsHandler(_statementRepository, _reportRepository);
     }
     
     [Test]
@@ -41,7 +44,7 @@ public class AggregateTransactionsHandlerTests
             Month = month
         };
 
-        _repository.IsFound(configId, year, month).Returns(Task.FromResult(true));
+        _statementRepository.IsFound(configId, year, month).Returns(Task.FromResult(true));
 
         var response = await _handler.Handle(command, CancellationToken.None);
         
@@ -49,7 +52,7 @@ public class AggregateTransactionsHandlerTests
     }
 
     [Test]
-    public async Task CreateStatementSuccess_ReturnTrue()
+    public async Task Success_ReturnTrue()
     {
         var configId = Guid.NewGuid();
         var year = 2023;

@@ -1,6 +1,7 @@
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Reporting.API.Utils;
+using Reporting.Domain.ReportAggregate;
 using Reporting.Domain.StatementAggregate;
 using Reporting.Domain.TransactionAggregate;
 using Reporting.Infrastructure.Repositories;
@@ -34,6 +35,7 @@ builder.Services.AddMediatR(cfg => {
 // Custom Services
 builder.Services.AddSingleton<ITransactionRepository, TransactionRepository>();
 builder.Services.AddSingleton<IStatementRepository, StatementRepository>();
+builder.Services.AddSingleton<IReportRepository, ReportRepository>();
 builder.Services.AddSingleton<IClock, Clock>();
 
 // Custom Configurations

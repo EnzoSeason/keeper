@@ -1,8 +1,9 @@
+using Domain.SeedWork;
 using Reporting.Domain.StatementAggregate;
 
 namespace Reporting.Domain.ReportAggregate;
 
-public interface IReportRepository
+public interface IReportRepository : IRepository<Report>
 {
-    Task Build(Statement statement);
+    Task Analyze(Statement statement);
 }
