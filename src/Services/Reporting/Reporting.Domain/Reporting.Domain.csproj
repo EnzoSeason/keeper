@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\SeedWorks\Domain.SeedWork\Domain.SeedWork.csproj" />
+      <ProjectReference Include="..\..\Configuring\Configuring.Domain\Configuring.Domain.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ public record AnalysisRow
     
     public AnalysisType AnalysisType { get; init; }
 
-    public decimal Amount { get; init; }
+    public decimal Amount { get; set; }
 
     public string Currency { get; init; } = null!;
 }
