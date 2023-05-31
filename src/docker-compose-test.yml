@@ -34,5 +34,5 @@ services:
       context: .
       dockerfile: Services/Configuring/Configuring.API/Dockerfile
       target: integrationtest
-      depends_on:
-        - nosql-db
+    depends_on:
+      - nosql-db
