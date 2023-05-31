@@ -6,6 +6,7 @@ on:
     paths:
     - src/Services/Reporting/**
     - .github/workflows/reporting-api.yml
+    - src/docker-compose-test.*.yml
   
   pull_request:
     branches: [ "main" ]
