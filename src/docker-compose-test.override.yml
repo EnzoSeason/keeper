@@ -31,6 +31,26 @@ services:
       - dotnet
       - test
 
+  configuring-api-unit-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "4211:80"
+    entrypoint:
+      - dotnet
+      - test
+
+  configuring-api-integration-test:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MongoDb__ConnectionString=mongodb://admin:pass@nosql-db:27017
+      - MongoDb__DatabaseName=KeeperAppTest
+    ports:
+      - "4212:80"
+    entrypoint:
+      - dotnet
+      - test
+
 volumes:
   mongodb_test_data:
   mongodb_test_config:

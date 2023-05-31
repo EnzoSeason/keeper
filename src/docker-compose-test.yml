@@ -27,3 +27,12 @@ services:
       context: .
       dockerfile: Services/Configuring/Configuring.API/Dockerfile
       target: unittest
+
+  configuring-api-integration-test:
+    image: ${REGISTRY:-keeper}/configuring-api-integration-test:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: Services/Configuring/Configuring.API/Dockerfile
+      target: integrationtest
+      depends_on:
+        - nosql-db

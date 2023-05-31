@@ -24,3 +24,15 @@ jobs:
     - uses: ./.github/workflows/composite/test
       with:
         service: configuring-api-unit-test
+
+
+  integration_test:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+    - uses: ./.github/workflows/composite/test
+      with:
+        service: configuring-api-integration-test

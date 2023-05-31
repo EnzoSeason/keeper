@@ -15,6 +15,9 @@ RUN dotnet build "Configuring.API.csproj" -c Release -o /app/build
 FROM build AS unittest
 WORKDIR "/src/Services/Configuring/Configuring.UTest"
 
+FROM build AS integrationtest
+WORKDIR "/src/Services/Configuring/Configuring.ITest"
+
 FROM build AS publish
 RUN dotnet publish "Configuring.API.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
