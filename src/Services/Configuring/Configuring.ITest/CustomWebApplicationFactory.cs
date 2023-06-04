@@ -14,7 +14,7 @@ public class CustomWebApplicationFactory<TProgram>
     {
         builder.ConfigureServices(services =>
         {
-            services.Configure<MongoDbSettings>(settings =>
+            services.Configure<ConfiguringDbSettings>(settings =>
             {
                 settings.ConnectionString = MongoDbTestInstance.ConnectionString;
                 settings.DatabaseName = MongoDbTestInstance.DatabaseName;

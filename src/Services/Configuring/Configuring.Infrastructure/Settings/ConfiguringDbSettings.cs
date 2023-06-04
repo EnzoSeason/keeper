@@ -3,7 +3,7 @@ using MongoDB.Driver;
 
 namespace Configuring.Infrastructure.Settings;
 
-public class MongoDbSettings
+public class ConfiguringDbSettings
 {
     public string ConnectionString { get; set; } = null!;
 
@@ -12,9 +12,9 @@ public class MongoDbSettings
     public string SourceCollectionName { get; set; } = null!;
 }
 
-public static class MongoDbHelper
+public static class ConfiguringDbHelper
 {
-    public static IMongoDatabase GetDatabase(IOptions<MongoDbSettings> mongoDbSettings)
+    public static IMongoDatabase GetDatabase(IOptions<ConfiguringDbSettings> mongoDbSettings)
     {
         var mongoClient = new MongoClient(
             mongoDbSettings.Value.ConnectionString);

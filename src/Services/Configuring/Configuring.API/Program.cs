@@ -28,7 +28,7 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddSingleton<ISourceRepository, SourceRepository>();
 
 // Custom Configurations
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));
+builder.Services.Configure<ConfiguringDbSettings>(builder.Configuration.GetSection("MongoDb"));
 
 var app = builder.Build();
 

@@ -9,9 +9,9 @@ public class SourceRepository : ISourceRepository
 {
     private readonly IMongoCollection<Source> _sourceCollection;
 
-    public SourceRepository(IOptions<MongoDbSettings> mongoDbSettings)
+    public SourceRepository(IOptions<ConfiguringDbSettings> mongoDbSettings)
     {
-        var mongoDatabase = MongoDbHelper.GetDatabase(mongoDbSettings);
+        var mongoDatabase = ConfiguringDbHelper.GetDatabase(mongoDbSettings);
 
         _sourceCollection = mongoDatabase.GetCollection<Source>(mongoDbSettings.Value.SourceCollectionName);
     }
