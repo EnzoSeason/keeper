@@ -9,9 +9,9 @@ public class TransactionRepository: ITransactionRepository
 {
     private readonly IMongoCollection<Transaction> _transactionCollection;
 
-    public TransactionRepository(IOptions<MongoDbSettings> mongoDbSettings)
+    public TransactionRepository(IOptions<ReportingDbSettings> mongoDbSettings)
     {
-        var mongoDatabase = MongoDbHelper.GetDatabase(mongoDbSettings);
+        var mongoDatabase = ReportingDbHelper.GetDatabase(mongoDbSettings);
 
         _transactionCollection =
             mongoDatabase.GetCollection<Transaction>(mongoDbSettings.Value.TransactionCollectionName);

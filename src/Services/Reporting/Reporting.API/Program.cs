@@ -39,7 +39,7 @@ builder.Services.AddSingleton<IReportRepository, ReportRepository>();
 builder.Services.AddSingleton<IClock, Clock>();
 
 // Custom Configurations
-builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection("MongoDb"));
+builder.Services.Configure<ReportingDbSettings>(builder.Configuration.GetSection("MongoDb"));
 
 var app = builder.Build();
 

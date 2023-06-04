@@ -12,9 +12,9 @@ public class StatementRepository : IStatementRepository
     private readonly IMongoCollection<Statement> _statementCollection;
     private readonly IMongoCollection<Transaction> _transactionCollection;
 
-    public StatementRepository(IOptions<MongoDbSettings> mongoDbSettings)
+    public StatementRepository(IOptions<ReportingDbSettings> mongoDbSettings)
     {
-        var mongoDatabase = MongoDbHelper.GetDatabase(mongoDbSettings);
+        var mongoDatabase = ReportingDbHelper.GetDatabase(mongoDbSettings);
 
         
         _transactionCollection =
