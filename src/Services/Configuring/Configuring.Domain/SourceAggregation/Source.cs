@@ -14,12 +14,7 @@ public record Source: IAggregateRoot, IValidatableObject
 
     /// <summary>
     /// Source name. It's descriptive.
-    /// <list type="bullet">
-    ///   <item>
-    ///     <term>Bank: </term>
-    ///     <description>SG, Boursorama, etc.</description>
-    ///   </item>
-    /// </list>
+    /// <para>e.g. Jack's bank accounts</para>
     /// </summary>
     public string Name { get; init; } = null!;
     
