@@ -14,16 +14,18 @@ public class ReportingDbSettings
     public string StatementCollectionName { get; set; } = null!;
 
     public string ReportCollectionName { get; set; } = null!;
+
+    public string SourceCollectionName { get; set; } = null!;
 }
 
 public static class ReportingDbHelper
 {
-    public static IMongoDatabase GetDatabase(IOptions<ReportingDbSettings> mongoDbSettings)
+    public static IMongoDatabase GetDatabase(IOptions<ReportingDbSettings> reportingDbSettings)
     {
         var mongoClient = new MongoClient(
-            mongoDbSettings.Value.ConnectionString);
+            reportingDbSettings.Value.ConnectionString);
         
         return mongoClient.GetDatabase(
-            mongoDbSettings.Value.DatabaseName);
+            reportingDbSettings.Value.DatabaseName);
     }
 }

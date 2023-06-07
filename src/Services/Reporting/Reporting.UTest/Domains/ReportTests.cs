@@ -29,7 +29,7 @@ public class ReportTests
             
             AssertAnalysisRow(report.Rows, "Daily Spend", -38.18m);
             AssertAnalysisRow(report.Rows, "Subscription", -94m);
-            AssertAnalysisRow(report.Rows, "Others", 1000m);
+            AssertAnalysisRow(report.Rows, "Others", 100m);
         });
     }
 
@@ -41,7 +41,7 @@ public class ReportTests
         Assert.That(row!.Amount, Is.EqualTo(expectedAmount));
     }
 
-    private static Source GetSource() => new Source
+    private static Source GetSource() => new()
     {
         Categories = new[]
         {
@@ -58,7 +58,7 @@ public class ReportTests
         }
     };
 
-    private static Statement GetStatement() => new Statement
+    private static Statement GetStatement() => new()
     {
         ConfigId = Guid.NewGuid(),
         Year = 2023,
@@ -67,7 +67,7 @@ public class ReportTests
         {
             new TransactionRow
             {
-                Label = "asian restaurant",
+                Label = "asian        restaurant", // having extra whitespace between words
                 Amount = -25.83m
             },
             new TransactionRow
@@ -89,6 +89,11 @@ public class ReportTests
             {
                 Label = "something crazy",
                 Amount = 1000m
+            },
+            new TransactionRow
+            {
+                Label = "something bad",
+                Amount = -900m
             }
         }
     };

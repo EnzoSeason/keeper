@@ -27,7 +27,7 @@ public record Report : IAggregateRoot
             c => c.Keywords, 
             c => new AnalysisRow { Label = c.Name, AnalysisType = AnalysisType.Sum, Currency = "EUR" });
 
-        var others = new AnalysisRow { Label = "Others", AnalysisType = AnalysisType.Sum, Currency = "EUR" };
+        var others = new AnalysisRow { Label = "Others", AnalysisType = AnalysisType.Sum, Currency = "EUR", Amount = 0m};
 
         foreach (var transactionRow in statement.Rows)
         {
@@ -37,7 +37,12 @@ public record Report : IAggregateRoot
                 if (isClassified) { break; }
                 
                 // TODO: find more indicators for classifying transaction rows
-                var isInCategory = transactionRow.Label.Split(" ").Any(word => keywords.Contains(word));
+                var isInCategory = transactionRow.Label
+                    .Split(" ")
+                    .Where(word => !string.IsNullOrEmpty(word))
+                    .Select(word => word.ToLower())
+                    .Any(word => keywords.Contains(word));
+                
                 if (isInCategory)
                 {
                     analysisRow.Amount += transactionRow.Amount;
