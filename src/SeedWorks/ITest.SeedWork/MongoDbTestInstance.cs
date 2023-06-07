@@ -10,7 +10,7 @@ public record MongoDbTestInstance
         Environment.GetEnvironmentVariable("MongoDb__ConnectionString") ?? "mongodb://localhost:27017";
 
     public static readonly string DatabaseName =
-        Environment.GetEnvironmentVariable("MongoDb__DatabaseName") ?? "KeeperReportingTest";
+        Environment.GetEnvironmentVariable("MongoDb__DatabaseName") ?? "KeeperAppTest";
     
     public IMongoCollection<T> GetCollection<T>() => Client.GetDatabase(DatabaseName).GetCollection<T>(typeof(T).Name);
 }
