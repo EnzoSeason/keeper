@@ -14,12 +14,12 @@ public class ConfiguringDbSettings
 
 public static class ConfiguringDbHelper
 {
-    public static IMongoDatabase GetDatabase(IOptions<ConfiguringDbSettings> mongoDbSettings)
+    public static IMongoDatabase GetDatabase(IOptions<ConfiguringDbSettings> configuringDbSettings)
     {
         var mongoClient = new MongoClient(
-            mongoDbSettings.Value.ConnectionString);
+            configuringDbSettings.Value.ConnectionString);
         
         return mongoClient.GetDatabase(
-            mongoDbSettings.Value.DatabaseName);
+            configuringDbSettings.Value.DatabaseName);
     }
 }
