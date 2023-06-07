@@ -17,9 +17,9 @@ There are 2 services:
 
   It collects the transactions and build the report from them.
 
-### Configuring Service
+## Configuring Service
 
-#### API
+### API
 
 It's a CRUD API.
 
@@ -29,9 +29,9 @@ It's a CRUD API.
 
 - Update a config: Only the reporting configuration can be updated. UID is immutable.
 
-### Reporting Service
+## Reporting Service
 
-#### API
+### API
 
 It follows CQRS architecture pattern.
 
