@@ -13,27 +13,35 @@ There are 2 services:
 
   It manages the reporting configuration. The reporting configuration indicates how the report is created from the data source.
 
-  It's a CRUD API.
-
-  - Create a config: It must have a username and UID.
-
-  - Read a config
-
-  - Update a config: Only the reporting configuration can be updated. UID is immutable.
-
 - Reporting Service:
 
   It collects the transactions and build the report from them.
 
-  It follows CQRS architecture pattern.
+### Configuring Service
 
-  - **Add transactions command**
+### API
 
-  - **Upload a CSV file of transaction command**
+It's a CRUD API.
 
-  - **Build a report command**: It receives the command that asks the App to read the data from database, create the report, and save the results into database
+- Create a config: It must have a username and UID.
 
-  - **Get a report query**: It returns the reporting result.
+- Read a config
+
+- Update a config: Only the reporting configuration can be updated. UID is immutable.
+
+### Reporting Service
+
+#### API
+
+It follows CQRS architecture pattern.
+
+- **Add transactions command**
+
+- **Upload a CSV file of transaction command**
+
+- **Build a report command**: It receives the command that asks the App to read the data from database, create the report, and save the results into database
+
+- **Get a report query**: It returns the reporting result.
 
 ## Usage (In Progress)
 
