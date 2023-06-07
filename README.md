@@ -16,6 +16,8 @@ There are 2 services:
 - Reporting Service:
 
   It collects the transactions and build the report from them.
+  
+Both of 2 services write into the same database on the same instance. Technically, they can access all the collections used by them. However, the access permission of each service is controlled by its own `appsetting.json`.
 
 ## Configuring Service
 
