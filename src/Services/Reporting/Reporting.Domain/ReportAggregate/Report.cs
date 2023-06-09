@@ -39,8 +39,6 @@ public record Report : IAggregateRoot
                 // TODO: find more indicators for classifying transaction rows
                 var isInCategory = transactionRow.Label
                     .Split(" ")
-                    .Where(word => !string.IsNullOrEmpty(word))
-                    .Select(word => word.ToLower())
                     .Any(word => keywords.Contains(word));
                 
                 if (isInCategory)

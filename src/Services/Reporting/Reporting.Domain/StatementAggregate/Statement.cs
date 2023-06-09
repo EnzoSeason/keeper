@@ -29,9 +29,18 @@ public record Statement: IValidatableObject, IAggregateRoot
             ConfigId = configId,
             Year = year,
             Month = month,
-            Rows = transactions.SelectMany(t => t.Rows)
+            Rows = transactions.SelectMany(NormalizeRows)
         };
     }
+
+    private static IEnumerable<TransactionRow> NormalizeRows(Transaction transaction) =>
+        from row in transaction.Rows
+        let labels = row.Label
+            .Split(" ").Where(word => !string.IsNullOrEmpty(word))
+            .Select(word => word
+                .Trim('"')
+                .ToLower())  
+        select row with { Label = string.Join(" ", labels) };
     
     public virtual bool Equals(Statement? other)
     {

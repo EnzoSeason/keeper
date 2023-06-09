@@ -67,7 +67,7 @@ public class ReportTests
         {
             new TransactionRow
             {
-                Label = "asian        restaurant", // having extra whitespace between words
+                Label = "asian restaurant",
                 Amount = -25.83m
             },
             new TransactionRow
